@@ -1,0 +1,83 @@
+
+<div >
+  <h2 mat-dialog-title>  Create a request form </h2>
+  <mat-dialog-content class="mat-typography" >
+   <form class="example-form " style="width: 1000px;">
+  
+    <div  fxLayout="column" fxLayoutAlign="center center"  >
+    
+      <mat-form-field appearance="outline" class ="example-full-width">
+             <mat-label>Firstname</mat-label>
+             <input matInput  >
+             </mat-form-field>
+           
+            <mat-form-field appearance="outline" class ="example-full-width">
+             <mat-label>lastname</mat-label>
+             <input matInput class ="example-full-width">
+           </mat-form-field>
+           <mat-form-field appearance="outline" class ="example-full-width">
+             <mat-label>Email</mat-label>
+             <input matInput  class ="example-full-width">
+           </mat-form-field>
+           
+     
+        
+          <div   fxLayout="row" fxLayoutAlign="start start">
+           <mat-form-field appearance="fill" class="example-form">
+             <mat-label>Select country</mat-label>
+             <mat-select>
+               <mat-option value="one">tanzania </mat-option>
+               <mat-option value="two">kenya</mat-option>
+               <mat-option value="one">uganda </mat-option>
+               <mat-option value="two">rwanda</mat-option>
+               <mat-option value="one">burundi </mat-option>
+               <mat-option value="two">ghane</mat-option>
+               <mat-option value="one">america</mat-option>
+               <mat-option value="two">europe</mat-option>
+             </mat-select>
+           </mat-form-field>
+           <mat-form-field appearance="fill" class ="example-full-width">
+             <mat-label>Select distrit</mat-label>
+             <mat-select>
+               <mat-option value="one"> temeke </mat-option>
+               <mat-option value="two">ilala</mat-option>
+               <mat-option value="one">rufiji </mat-option>
+               <mat-option value="two">kinondoni</mat-option>
+               <mat-option value="one">majengo </mat-option>
+               <mat-option value="two">alighane</mat-option>
+               <mat-option value="one">mec</mat-option>
+               <mat-option value="two">tenure</mat-option>
+             </mat-select>
+           </mat-form-field>
+          </div>
+            
+               <mat-form-field appearance="fill" class ="example-full-width">
+                 <mat-label>Select center</mat-label>
+                 <mat-select>
+                   <mat-option value="one"> temeke </mat-option>
+                   <mat-option value="two">ilala</mat-option>
+                   <mat-option value="one">rufiji </mat-option>
+                   <mat-option value="two">kinondoni</mat-option>
+                   <mat-option value="one">majengo </mat-option>
+                   <mat-option value="two">alighane</mat-option>
+                   <mat-option value="one">mec</mat-option>
+                   <mat-option value="two">tenure</mat-option>
+                 </mat-select>
+               </mat-form-field>
+               <mat-form-field class="example-full-width" appearance="fill">
+                 <mat-label>write a request</mat-label>
+                 <textarea matInput placeholder=""></textarea>
+               </mat-form-field>
+     </div>
+  
+   </form>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-raised-button mat-dialog-close color="primary">Create</button>
+  </mat-dialog-actions>
+</div>
+
+
+
+
+

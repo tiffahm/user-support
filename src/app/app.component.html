@@ -1,0 +1,45 @@
+<body >
+
+  
+  <div class="application-container">
+    <ngx-dhis2-menu> </ngx-dhis2-menu>
+  
+       <div    style="margin-top: 50px;">
+         <div >
+  
+          <h4 style=" margin-top: auto;">  Welcome to  DHIS2 support</h4>
+          <div  fxLayout="row" fxLayoutAlign="space-evenly stretch" class= "container">
+            <button mat-stroked-button color="warn"  (click)="openuserDialog()" > 
+              <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
+              USER FEEDBACK
+            </button>
+            <button mat-raised-button   (click)="openDialog()"> CREATE USER</button>
+            <button mat-raised-button color="warn"   (click)="openuserDialog()"> REQUEST FORM</button>
+            <button mat-raised-button (click)="openDialog()"> RESET PASSWORD</button>
+          </div>
+          <div  >
+    
+           
+            
+    
+              <router-outlet></router-outlet>
+              {{title}}
+           
+           
+                 
+               
+              
+            
+          </div>
+  
+         </div>
+          
+  
+  
+      
+     
+    </div>
+  </div>
+ 
+
+</body>

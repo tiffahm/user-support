@@ -1,0 +1,19 @@
+.application-content {
+  position:  sticky;
+  margin-top: 50px;
+}
+.container{
+  margin-top: 10px;
+}
+app-requestfromuser{
+
+  position: fixed;
+  background-position: center;
+
+  width: 100%;
+
+}
+button{
+  align-content:flex-start;
+}
+
