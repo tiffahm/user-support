@@ -5,7 +5,14 @@ import { Fn } from '@iapps/function-analytics';
 import { MatDialog } from '@angular/material/dialog';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { RequestformComponent } from './requestform/requestform.component';
-import { DhisdataService } from './dhisdata.service';
+import { DhisdataService } from './services/dhisdata.service';
+import { DatasetService } from './services/dataset.service';
+import { WritefeedbackComponent } from './writefeedback/writefeedback.component';
+import { MessageserviceService } from './services/messageservice.service';
+import { CreateuserComponent } from './createuser/createuser.component';
+
+
+
 
 @Component({
   selector: 'app-root',
@@ -21,9 +28,12 @@ export class AppComponent {
     private translate: TranslateService,
     private titleService: Title,
     public dialog : MatDialog,
-    public   user: DhisdataService 
+    public   user: DhisdataService ,
+    public dataset : DatasetService,
+    public messages : MessageserviceService
     
-    ) {
+    
+) {
     // this language will be used as a fallback when a translation isn't found in the current language
     this.translate.setDefaultLang('en');
 
@@ -39,25 +49,25 @@ export class AppComponent {
       });
     }
   }
-
+  ngOnInit() {
+  }  
+  getdataset(){
+  }
   public setTitle(newTitle: string) {
     this.titleService.setTitle(newTitle);
   }
-
-  onapicall()
-{
-  this.user.getData().subscribe((data)=>{
-    console.warn(data);
-  this.title = data ['title'];
-  })
-}   
 openDialog(){
    this.dialog.open(ResetpasswordComponent);
  }
-
- openuserDialog(){
+ openfeedback(){
+  this.dialog.open(WritefeedbackComponent);
+}
+ openuserForm(){
    this.dialog.open(RequestformComponent);
  }
+ openuserDialog(){
+  this.dialog.open(CreateuserComponent);
+}
   
 }
 

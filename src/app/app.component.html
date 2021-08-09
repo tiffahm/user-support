@@ -1,45 +1,107 @@
-<body >
-
-  
+ <body >
   <div class="application-container">
     <ngx-dhis2-menu> </ngx-dhis2-menu>
   
        <div    style="margin-top: 50px;">
          <div >
   
-          <h4 style=" margin-top: auto;">  Welcome to  DHIS2 support</h4>
+          <h4 style=" margin-top: auto;">  Welcome t0  DHIS2 support</h4>
           <div  fxLayout="row" fxLayoutAlign="space-evenly stretch" class= "container">
-            <button mat-stroked-button color="warn"  (click)="openuserDialog()" > 
-              <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
-              USER FEEDBACK
+            <button mat-raised-button color="warn"  (click)="openfeedback()" > 
+               WRITE FEEDBACK
             </button>
-            <button mat-raised-button   (click)="openDialog()"> CREATE USER</button>
-            <button mat-raised-button color="warn"   (click)="openuserDialog()"> REQUEST FORM</button>
+            <button mat-raised-button  (click)="openuserDialog()"> CREATE USER</button>
+            <button mat-raised-button color="warn" (click)="openuserForm()"> REQUEST FORM</button>
             <button mat-raised-button (click)="openDialog()"> RESET PASSWORD</button>
           </div>
           <div  >
-    
-           
+            <router-outlet></router-outlet>
+               <div  fxLayout="column" fxLayoutAlign="center center" >
+                <app-userfeedback></app-userfeedback>
+                
+               </div>
             
-    
-              <router-outlet></router-outlet>
-              {{title}}
-           
-           
-                 
-               
-              
+
+                        <div>
+
+                         
+
+
+             
+          
+          </div>
+
+
             
           </div>
-  
          </div>
-          
-  
-  
-      
-     
     </div>
   </div>
  
+  
+  
+  <!-- <mat-tab-group  mat-align-tabs="center">
+    
+    <mat-tab label="DHIS2 USERS"  > 
+      <div  fxLayout="row" fxLayoutAlign="center center" style="margin-top:50px;">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">#Id</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Phone</th>
+              <th scope="col">update</th>
+              <th scope="col">delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of Users">
+              <td>{{user.id}}</td>
+              <td>{{user.name}}</td>
+              <td>{{user.email}}</td>
+              <td>{{user.phone}}</td>
+              <td>
+                <span class="text-primary" (click)="remove(user.id)">Delete</span>
+              </td>
+              <td>
+                <span class="text-primary" (click)="create(user.id)">Delete</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div> 
+    </mat-tab> -->
 
-</body>
+
+
+<!-- 
+
+    <mat-tab label="Request form"  > 
+      <div  fxLayout="row" fxLayoutAlign="center center" style="margin-top:50px;">
+        <app-requestform></app-requestform>
+      </div> 
+    </mat-tab>
+    <mat-tab label="Reset password"> 
+      <div fxLayout="row" fxLayoutAlign="center center" style="margin-top:50px;" >
+      <app-resetpassword></app-resetpassword>
+    </div> </mat-tab>
+    <mat-tab label="Third"> 
+       
+      <H1>
+
+        DHIS2 Software
+      </H1> 
+The DHIS2 WAR file requires you to install a Java servlet container (like Tomcat or Jetty) and PostgreSQL. You can get the latest stable release for all maintained versions from the links below, and the very latest build from here. Check out the installation guide for Ubuntu Linux.
+
+The WAR files are hosted on releases.dhis2.org where you can also find nightly (“canary”) as well as bleeding-edge (“development”) builds, by selecting the appropriate channel.
+
+Please note that if you are upgrading your DHIS2 instance you should consult the upgrade notes for each version in between your current version and the new version you are installing, to be aware of any new requirements or configuration changes. Refer to our upgrading documentation for additional information and tips.
+
+       </mat-tab>
+  </mat-tab-group> -->
+
+
+
+    
+ 

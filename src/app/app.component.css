@@ -17,3 +17,6 @@ button{
   align-content:flex-start;
 }
 
+table {
+  width: 100%;
+}

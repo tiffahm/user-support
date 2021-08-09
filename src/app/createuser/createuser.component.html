@@ -1,0 +1,95 @@
+     <div   fxLayout="column" fxLayoutAlign="center center"  style="margin-top: 30px; "  >
+     
+     
+            <h2 mat-dialog-title>Create user</h2>
+        
+            <form class="example-form" [formGroup]="myForm" (ngSubmit)="submitForm()"  >
+
+                <mat-form-field appearance="fill" class ="example-full-width">
+                    <mat-label>Select organization unit</mat-label>
+                    <mat-select  formControlName="organizationunit">
+                      <mat-option>None</mat-option>
+                      <mat-option [value] ="selectedunits.displayName" *ngFor="let selectedunits of selectedunits"> {{selectedunits.displayName}} </mat-option>
+                      </mat-select>
+                  </mat-form-field>
+                              <p >    </p> 
+              <div   fxLayout="row" fxLayoutAlign="center center" >
+                <mat-form-field class ="example-full-width" appearance="outline">
+                    <mat-label>Firstname</mat-label>
+                   <input matInput  type="text" hint="ariana" formControlName="firstname">
+                   <mat-error *ngIf="errorHandling('firstname', 'required')">
+                    You must provide a<strong>name</strong>
+                 </mat-error>
+              
+                  </mat-form-field>
+
+                  <mat-form-field class ="example-full-width" appearance="outline" style="margin-left: 15px;">
+                  <mat-label>last name</mat-label>
+                <input matInput type="text" hint="ariana" formControlName="lastname">
+                <mat-error *ngIf="errorHandling('lastname', 'required')">
+                  You must provide a<strong>name</strong>
+               </mat-error>
+                
+              </mat-form-field>
+              </div>
+               
+                 
+                  <mat-form-field class ="example-full-width" appearance="outline">
+                    <mat-label>email</mat-label>
+                   <input matInput  type="email" hint="ariana" formControlName="email">
+                   <mat-error *ngIf="errorHandling('email', 'required')">
+                    You must provide a<strong>email</strong>
+                 </mat-error>
+                  </mat-form-field>
+                  
+                    
+                    <mat-form-field class="example-full-width" appearance="outline">
+                      <mat-label>phone no</mat-label>
+                      <span matPrefix>+255 &nbsp;</span>
+                      <input type="tel" matInput placeholder="555-555-1234" formControlName="phone">
+                      <mat-icon matSuffix>phone</mat-icon>
+                      <mat-error *ngIf="errorHandling('phone', 'required')">
+                        You must provide a<strong>phone number</strong>
+                     </mat-error>
+                    </mat-form-field>
+                  
+    
+                  <mat-form-field class ="example-full-width" appearance="outline">
+                    <mat-label> password</mat-label>
+                   <input matInput  type="password" hint="ariana" formControlName="password">
+                  </mat-form-field>
+               
+                  <mat-form-field class ="example-full-width" appearance="outline" >
+                  <mat-label>confirm password</mat-label>
+                <input matInput type="password" hint="ariana" formControlName="confirmpassword"> 
+              </mat-form-field>
+                
+
+                 <div  fxLayout="row" fxLayoutAlign="center center">
+                    <mat-form-field appearance="fill" class ="example-full-width">
+                        <mat-label>choose roles</mat-label>
+                        <mat-select formControlName="userroleunit" multiple>
+                          <mat-option>None</mat-option>
+                          <mat-option [value] = "selectedrole.displayName" *ngFor="let selectedrole of selectedrole">{{selectedrole.displayName}}</mat-option>
+                         
+                        </mat-select>
+                      </mat-form-field>
+                      <mat-form-field appearance="fill" class ="example-full-width">
+                        <mat-label>Select user Group</mat-label>
+                        <mat-select formControlName="usergroupunit" multiple>
+                          <mat-option>None</mat-option>
+                          <mat-option   [value] ="selectedgroup.displayName" *ngFor="let selectedgroup of selectedgroup" >{{selectedgroup.displayName}} </mat-option>
+                         
+                        </mat-select>
+                      </mat-form-field>
+                 </div>
+                 <div   fxLayout="row" fxLayoutAlign="space-evenly center">
+                    <button mat-raised-button   color="primary" style="margin-left:350px; "  (click) =" submitForm()" matDialogClose="yes" > Submit </button>
+                    </div> 
+
+                    </form>
+
+                 
+       
+        
+      </div>

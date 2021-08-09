@@ -1,4 +1,6 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { Component, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -33,6 +35,14 @@ import { BottomSheetOverviewExampleComponent } from './bottom-sheet-overview-exa
 import {MatIconModule} from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
+import { NotificationComponent } from './notification/notification.component';
+import { CreateuserComponent } from './createuser/createuser.component';
+import { UserfeedbackComponent } from './userfeedback/userfeedback.component';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import { WritefeedbackComponent } from './writefeedback/writefeedback.component';
+import { FormsModule } from '@angular/forms';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 
 
 
@@ -46,8 +56,12 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 
 @NgModule({
-  declarations: [AppComponent, ResetpasswordComponent, RequestformComponent, BottomSheetOverviewExampleComponent],
+  declarations: [AppComponent, ResetpasswordComponent, RequestformComponent, BottomSheetOverviewExampleComponent, NotificationComponent, CreateuserComponent, UserfeedbackComponent, WritefeedbackComponent],
   imports: [
+    MatPaginatorModule,
+    FormsModule,
+    ReactiveFormsModule,                                                                                                                    
+    MatBottomSheetModule,
     MatButtonModule,
     MatIconModule,
     MatSidenavModule,
@@ -64,6 +78,14 @@ export function HttpLoaderFactory(http: HttpClient) {
 
       component: ResetpasswordComponent
     },
+    { path : 'user' , 
+
+    component: CreateuserComponent
+  },
+  { path : 'feedback' , 
+
+  component: WritefeedbackComponent
+},
     { path : 'form' , 
       
     component: RequestformComponent
@@ -109,7 +131,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       enabled: environment.production
     })
   ],
-  providers: [{ provide: RouterStateSerializer, useClass: RouteSerializer }],
+  providers: [{ provide: RouterStateSerializer, useClass: RouteSerializer}],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
