@@ -26,7 +26,7 @@ export class MessageserviceService {
 
 getFeedback(){
        
-  return this.feedback.get('messageConversations.json?fields=messageType,users,lastSender')
+  return this.feedback.get('messageConversations.json?fields=content,user,messageType,subject')
   .pipe(
     retry(1),
     catchError(this.httpError)

@@ -1,18 +1,67 @@
-<div  style="margin-top: 10px;">
-  
+<mat-accordion>
+        
+  <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle  *ngFor="let messagedata of messagedata">
+    <mat-expansion-panel-header>
+      <mat-panel-title >
+        <mat-icon>account_circle</mat-icon>
+         {{messagedata.messageType}}
+      </mat-panel-title>
+      <mat-panel-description>
+        Subject :{{messagedata.subject}}
+        <mat-icon>feedback</mat-icon>
+      <span class="spacer"></span>
+        <di>  19:05</di>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+          <P>we want the auction to be bid</P>
+    <mat-action-row>
+      <button mat-stroked-button  color="warn">Reject</button>
+      <button mat-button color="primary">Accept</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
 
-<!-- <table *ngFor="let messagedata of messagedata">
-  <tr> 
-    <td></td>
-  </tr>
-</table> -->
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div  style="margin-top: 10px;">
 <h2 mat-dialog-title>  USER FEEDBACK </h2>
 
 <table class="table table-bordered">
   <thead>
     <tr>
-      <th scope="col">#Id</th>
+      <th scope="col">profile</th>
+      <th scope="col">message type</th>
       <th scope="col">feedback</th>
       <th scope="col">approve</th>
       <th scope="col">delete</th>
@@ -21,8 +70,9 @@
   </thead>
   <tbody>
     <tr *ngFor="let messagedata of messagedata">
-      <td>{{messagedata.messageType}}</td>
-      <td>{{messagedata.displayName}}</td>
+      <td>{{messagedata.user}}</td>
+      <td>{{messagedata.messageType}}{{messagedata.messageType}}</td>
+      <td>{{messagedata.subject}} </td>
       <td> <button mat-stroked-button color= "primary"> Approve </button></td>
       <td><button mat-raised-button color="warn"> Reject  </button></td>
       <td>
@@ -32,4 +82,4 @@
   </tbody>
 </table>
 
-</div>
+</div> -->

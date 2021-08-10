@@ -1,42 +1,88 @@
  <body >
   <div class="application-container">
-    <ngx-dhis2-menu> </ngx-dhis2-menu>
+   <ngx-dhis2-menu> 
+   </ngx-dhis2-menu>
+<!-- <div    style="margin-top: 50px;">
   
-       <div    style="margin-top: 50px;">
-         <div >
-  
-          <h4 style=" margin-top: auto;">  Welcome t0  DHIS2 support</h4>
-          <div  fxLayout="row" fxLayoutAlign="space-evenly stretch" class= "container">
-            <button mat-raised-button color="warn"  (click)="openfeedback()" > 
-               WRITE FEEDBACK
-            </button>
-            <button mat-raised-button  (click)="openuserDialog()"> CREATE USER</button>
-            <button mat-raised-button color="warn" (click)="openuserForm()"> REQUEST FORM</button>
-            <button mat-raised-button (click)="openDialog()"> RESET PASSWORD</button>
-          </div>
-          <div  >
-            <router-outlet></router-outlet>
-               <div  fxLayout="column" fxLayoutAlign="center center" >
-                <app-userfeedback></app-userfeedback>
-                
-               </div>
-            
-
-                        <div>
-
-                         
-
-
-             
-          
-          </div>
-
-
-            
-          </div>
-         </div>
-    </div>
+    </div> -->
   </div>
+
+
+   
+  
+<mat-toolbar    style="margin-top: 50px; position: sticky;">  
+
+  <div    fxLayout="row" fxLayoutAlign="space-around start"  class="container">
+    <button  mat-raised-button >  <mat-icon>add</mat-icon> compose</button>
+    <button mat-raised-button color="warn"  (click)="openfeedback()" > 
+      WRITE FEEDBACK
+   </button>
+   <button mat-raised-button  (click)="openuserDialog()"> CREATE USER</button>
+   <button mat-raised-button color="warn" (click)="openuserForm()"> REQUEST FORM</button>
+   <button mat-raised-button (click)="openDialog()"> RESET PASSWORD</button>
+  </div>
+ 
+
+</mat-toolbar>
+  <mat-drawer-container class="example-container">
+    <mat-drawer mode="side" style="width: 300px;" opened>
+
+
+      <table>
+     
+      </table>
+      
+      <div fxLayout="column" fxLayoutAlign="start start" style="margin-top: 11px;">
+        <div style="border: 1px;">
+          <button  mat-button routerLink="/userfeedback" style="font-size: large;"
+          matBadge="10" [matBadgeHidden]="hidden" (click)="toggleBadgeVisibility()">
+          <mat-icon>email</mat-icon>
+          Inbox</button>
+        </div>
+        <div style="border: 1px;"  >
+          <button  mat-button routerLink="/userfeedback"  style="font-size: large;" matBadge="5" [matBadgeHidden]="hidden" (click)="toggleBadgeVisibility()">
+            <mat-icon>email</mat-icon>
+            Validation</button>
+        </div>
+        <div  style="border: 1px;"  >
+          <button  mat-button routerLink="/userfeedback" style="font-size: large;" matBadge="1" [matBadgeHidden]="hidden" (click)="toggleBadgeVisibility()">
+            <mat-icon>email</mat-icon>
+            Ticket</button>
+        </div>
+        <div  style="border: 1px;"  >
+          <button  mat-button routerLink="/userfeedback" style="font-size: large;" matBadge="3" [matBadgeHidden]="hidden" (click)="toggleBadgeVisibility()">
+            <mat-icon>email</mat-icon>
+            System</button>
+        </div>
+       
+        
+      
+
+      </div>
+     
+    </mat-drawer>
+    <mat-drawer-content>   
+      <router-outlet></router-outlet> 
+
+     
+    </mat-drawer-content>
+  </mat-drawer-container>
+     
+ 
+   
+  
+
+
+
+ 
+
+
+
+
+
+
+
+
  
   
   
@@ -75,9 +121,9 @@
 
 
 
-<!-- 
 
-    <mat-tab label="Request form"  > 
+
+    <!-- <mat-tab label="Request form"  > 
       <div  fxLayout="row" fxLayoutAlign="center center" style="margin-top:50px;">
         <app-requestform></app-requestform>
       </div> 
@@ -100,6 +146,8 @@ Please note that if you are upgrading your DHIS2 instance you should consult the
 
        </mat-tab>
   </mat-tab-group> -->
+
+ 
 
 
 

@@ -21,7 +21,21 @@ import { CreateuserComponent } from './createuser/createuser.component';
 })
 
 export class AppComponent {
+  hidden = false;
+  step = 0;
 
+  setStep(index: number) {
+    this.step = index;
+  }
+
+ 
+
+  toggleBadgeVisibility() {
+    this.hidden = !this.hidden;
+  }
+
+  panelOpenState = false;
+  
   title = "dhis2"
 
   constructor(

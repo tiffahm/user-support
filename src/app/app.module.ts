@@ -34,6 +34,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { BottomSheetOverviewExampleComponent } from './bottom-sheet-overview-example/bottom-sheet-overview-example.component';
 import {MatIconModule} from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import {MatBadgeModule} from '@angular/material/badge';
 
 import { NotificationComponent } from './notification/notification.component';
 import { CreateuserComponent } from './createuser/createuser.component';
@@ -42,6 +43,13 @@ import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import { WritefeedbackComponent } from './writefeedback/writefeedback.component';
 import { FormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatExpansionModule} from '@angular/material/expansion';
+
+
+
+
+
 
 
 
@@ -60,6 +68,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     MatPaginatorModule,
     FormsModule,
+    MatToolbarModule,
     ReactiveFormsModule,                                                                                                                    
     MatBottomSheetModule,
     MatButtonModule,
@@ -70,9 +79,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     FlexLayoutModule ,
     BrowserModule,
     HttpClientModule,
+    MatExpansionModule,
     RoutingModule,
     CoreModule,
     BrowserAnimationsModule,
+    MatBadgeModule,
     RouterModule.forRoot([
       { path : 'reset' , 
 
@@ -90,6 +101,10 @@ export function HttpLoaderFactory(http: HttpClient) {
       
     component: RequestformComponent
   },
+  { path : 'userfeedback' , 
+      
+  component: UserfeedbackComponent
+},
  
     ]),
     StoreModule.forRoot(reducers, { metaReducers }),

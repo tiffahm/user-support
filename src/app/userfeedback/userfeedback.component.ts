@@ -11,6 +11,12 @@ import { MessageserviceService } from '../services/messageservice.service';
 })
 export class UserfeedbackComponent implements OnInit {
 
+  step = 0;
+
+  setStep(index: number) {
+    this.step = index;
+  }
+
 messagedata : any [  ] 
 
 
@@ -27,7 +33,7 @@ messagedata : any [  ]
     return this.messages.getFeedback().subscribe((data : {})=>{
         console.log(data)
 
-        this.messagedata = data ['messageConversations']
+        this.messagedata= data ['messageConversations']
        })
 
 
