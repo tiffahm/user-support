@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageserviceService } from '../services/messageservice.service';
-
-
-
+import { MessageserviceService } from 'src/app/services/messageservice.service';
 
 @Component({
-  selector: 'app-userfeedback',
-  templateUrl: './userfeedback.component.html',
-  styleUrls: ['./userfeedback.component.css']
+  selector: 'app-systemfeedback',
+  templateUrl: './systemfeedback.component.html',
+  styleUrls: ['./systemfeedback.component.css']
 })
-export class UserfeedbackComponent implements OnInit {
+export class SystemfeedbackComponent implements OnInit {
 
   step = 0;
   count: number;
@@ -31,7 +28,7 @@ messagedata : any [  ]
 
   getmessages(){
 
-    return this.messages.getaFeedback().subscribe((data : {})=>{
+    return this.messages.getSystemFeedback().subscribe((data : {})=>{
         console.log(data)
 
         this.messagedata= data ['messageConversations']

@@ -1,19 +1,60 @@
 <mat-accordion>
+
+  <!-- <table  class="table table-bordered">
+
+  <thead>
+      <tr>
+        <th scope="col">profile</th>
+        <th scope="col">message type</th>
+        <th scope="col">feedback</th>
+        <th scope="col">approve</th>
+        <th scope="col">delete</th>
+        <th scope="col">pending request...</th>
+      </tr>
+    </thead>
+
+  </table> -->
+
+
         
   <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle  *ngFor="let messagedata of messagedata">
     <mat-expansion-panel-header>
+  
       <mat-panel-title >
         <mat-icon>account_circle</mat-icon>
-         {{messagedata.messageType}}
+         {{messagedata.user?.name}}
       </mat-panel-title>
       <mat-panel-description>
         Subject :{{messagedata.subject}}
+        
         <mat-icon>feedback</mat-icon>
       <span class="spacer"></span>
-        <di>  19:05</di>
+        
+        <button mat-raised-button  color="warn">DELETE</button>
       </mat-panel-description>
     </mat-expansion-panel-header>
-          <P>we want the auction to be bid</P>
+
+    <mat-card>
+      <P>we want the auction to be bid</P>
+    </mat-card>
+    <mat-card  style="margin-top: 10px;">
+
+      <mat-form-field class="example-full-width"  appearance="outline">
+        <mat-label>write a Text</mat-label>
+        <textarea matInput rows="5" cols="50" placeholder="text"  ></textarea>
+  
+      </mat-form-field>
+      <button mat-raised-button  color="primary">REPLY</button>
+      <button mat-stroked-button  style="margin-left: 10px;">DISCARD</button>
+      <button mat-stroked-button  style="margin-left: 10px;"> <mat-icon>
+        attach_file
+      </mat-icon> 
+        ATTACHMENT</button>
+
+
+
+    </mat-card>
+         
     <mat-action-row>
       <button mat-stroked-button  color="warn">Reject</button>
       <button mat-button color="primary">Accept</button>
