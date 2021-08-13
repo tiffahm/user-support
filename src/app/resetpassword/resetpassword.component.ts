@@ -6,6 +6,8 @@ import { NotificationComponent } from '../notification/notification.component';
 import { NgxDhis2HttpClientService } from '@iapps/ngx-dhis2-http-client';
 import { MustMatch } from '../shared/must-match';
 import { DhisdataService } from '../services/dhisdata.service';
+import { makeID } from '../shared/helpers/make-id.helper';
+import { matchOtherValidator } from '../shared/helpers/matchvalidators';
 
 
 
@@ -40,7 +42,7 @@ export class ResetpasswordComponent implements OnInit {
   reactiveForm() {
     this.myForm =  this.fb.group({
       password: ['',[Validators.required,Validators.minLength(4)]],
-      confirmpassword : ['',[Validators.required,Validators.minLength(4)]],
+      confirmpassword : ['',[Validators.required,Validators.minLength(4),matchOtherValidator('password')]],
      users:  ['',[Validators.required]],
       
      }
@@ -53,15 +55,6 @@ export class ResetpasswordComponent implements OnInit {
   }
 
 
-  makeid() {
-    let rand = "";
-    let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  
-    for (var i = 0; i < 9; i++)
-      rand+= possible.charAt(Math.floor(Math.random() * possible.length));
-  
-    return rand;
-  }
 
   
 
@@ -74,7 +67,7 @@ export class ResetpasswordComponent implements OnInit {
       "action": " reset the password of the following user",
       "method": "PUT",
 
-      "id" : this.makeid(),
+      id: makeID(),
       "payLoad" : {
         
           "id":this.myForm.get("users").value,
@@ -96,7 +89,7 @@ export class ResetpasswordComponent implements OnInit {
           ],
           "userGroups": [
             {
-              "id": this.makeid()
+              "id": '',
             }
           ],
      },
@@ -113,7 +106,7 @@ export class ResetpasswordComponent implements OnInit {
     )
 
     
-    this.password.post('dataStore/UserSupportApp/resetpaasword34.json',passwordPayload).subscribe(
+    this.password.post('dataStore/UserSupportApp/'+passwordPayload.id+'.json',passwordPayload).subscribe(
       (response) => console.log(response),
       (error) => console.log(error)
     )

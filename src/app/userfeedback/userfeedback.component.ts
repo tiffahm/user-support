@@ -25,6 +25,7 @@ messagedata : any [  ]
 
   ngOnInit(){
    this.getmessages()
+   this.deletemessage()
     
   }
 
@@ -37,7 +38,15 @@ messagedata : any [  ]
         this.messagedata= data ['messageConversations']
         this.count = this.messagedata.length
        })
+      }
+
+    deletemessage(){
+
+      return this.messages.deletemessage().subscribe((data : {})=>{
+        console.log(data)
 
 
-}
+      })
+
+    }
 }

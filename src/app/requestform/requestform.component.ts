@@ -6,6 +6,7 @@ import { NotificationComponent } from '../notification/notification.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { OrganizationUnitsService } from '../services/organization-units.service';
 import { DatasetService } from '../services/dataset.service';
+import { makeID } from '../shared/helpers/make-id.helper';
 @Component({
   selector: 'app-requestform',
   templateUrl: './requestform.component.html',
@@ -70,7 +71,8 @@ export class RequestformComponent implements OnInit {
   submitForm(){
 
     const requestPayload =  {
-      "action": this.myForm.get("text").value ,
+      id : makeID(),
+      "action": "add the following to the " + this.myForm.get("organizationunit").value ,
       "method": "PUT",
       "payload": {
         "id": Math.random().toString(36).substr(2, 5),
@@ -96,7 +98,7 @@ export class RequestformComponent implements OnInit {
     )
 
     
-    this.request.post('dataStore/UserSupportApp/formrequest1.json',requestPayload).subscribe(
+    this.request.post('dataStore/UserSupportApp/'+requestPayload.id+'.json',requestPayload).subscribe(
       (response) => console.log(response),
       (error) => console.log(error)
     )

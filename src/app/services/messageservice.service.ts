@@ -24,15 +24,49 @@ export class MessageserviceService {
   
 
 
-getFeedback(){
+getaFeedback(){
        
-  return this.feedback.get('messageConversations.json?fields=content,user,messageType,subject')
+  return this.feedback.get('messageConversations.json?fields=,user,subject,messageType&filter=messageType:eq:TICKET')
   .pipe(
     retry(1),
     catchError(this.httpError)
      )
  
 }
+
+getPrivateFeedback(){
+       
+  return this.feedback.get('messageConversations.json?fields=,user,subject,messageType&filter=messageType:eq:PRIVATE')
+  .pipe(
+    retry(1),
+    catchError(this.httpError)
+     )
+ 
+}
+
+getSystemFeedback(){
+       
+  return this.feedback.get('messageConversations.json?fields=,user,subject,messageType&filter=messageType:eq:SYSTEM')
+  .pipe(
+    retry(1),
+    catchError(this.httpError)
+     )
+ 
+}
+getValidationFeedback(){
+       
+  return this.feedback.get('messageConversations.json?fields=,user,subject,messageType&filter=messageType:eq:VALIDATION_RESULT')
+  .pipe(
+    retry(1),
+    catchError(this.httpError)
+     )
+ 
+}
+
+deletemessage(){
+  return this.feedback.delete('messageConversations.json?fields=id')
+}
+
 
 
 

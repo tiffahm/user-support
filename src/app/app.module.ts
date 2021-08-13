@@ -45,6 +45,10 @@ import { FormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { SystemfeedbackComponent } from './userfeedback/systemfeedback/systemfeedback.component';
+import { ValidatiofeebackComponent } from './userfeedback/validatiofeeback/validatiofeeback.component';
+import { PrivatefeedbackComponent } from './userfeedback/privatefeedback/privatefeedback.component';
+import { ComposemessageComponent } from './composemessage/composemessage.component';
 
 
 
@@ -64,7 +68,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 
 @NgModule({
-  declarations: [AppComponent, ResetpasswordComponent, RequestformComponent, BottomSheetOverviewExampleComponent, NotificationComponent, CreateuserComponent, UserfeedbackComponent, WritefeedbackComponent],
+  declarations: [AppComponent, ResetpasswordComponent, RequestformComponent, BottomSheetOverviewExampleComponent, NotificationComponent, CreateuserComponent, UserfeedbackComponent, WritefeedbackComponent, SystemfeedbackComponent, ValidatiofeebackComponent, PrivatefeedbackComponent, ComposemessageComponent],
   imports: [
     MatPaginatorModule,
     FormsModule,
@@ -85,6 +89,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserAnimationsModule,
     MatBadgeModule,
     RouterModule.forRoot([
+      { path: '',
+      
+      
+       redirectTo: '/privatefeedback',
+      
+       pathMatch: 'full' 
+    
+    },
       { path : 'reset' , 
 
       component: ResetpasswordComponent
@@ -104,6 +116,18 @@ export function HttpLoaderFactory(http: HttpClient) {
   { path : 'userfeedback' , 
       
   component: UserfeedbackComponent
+},
+{ path : 'privatefeedback' , 
+      
+component: PrivatefeedbackComponent
+},
+{ path : 'systemfeedback' , 
+      
+component: SystemfeedbackComponent
+},
+{ path : 'validationfeedback' , 
+      
+component: ValidatiofeebackComponent
 },
  
     ]),

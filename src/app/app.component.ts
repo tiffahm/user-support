@@ -10,6 +10,8 @@ import { DatasetService } from './services/dataset.service';
 import { WritefeedbackComponent } from './writefeedback/writefeedback.component';
 import { MessageserviceService } from './services/messageservice.service';
 import { CreateuserComponent } from './createuser/createuser.component';
+import { ComposemessageComponent } from './composemessage/composemessage.component';
+
 
 
 
@@ -21,16 +23,27 @@ import { CreateuserComponent } from './createuser/createuser.component';
 })
 
 export class AppComponent {
-  hidden = false;
+  pcount : number
+  vcount : number
+  scount : number
+  tcount : number
+  messagedata : any [  ] 
+  
+  hiddenp = false;
+  hidden=false;
   step = 0;
 
   setStep(index: number) {
     this.step = index;
   }
 
+
  
 
   toggleBadgeVisibility() {
+    this.hiddenp = !this.hiddenp;
+  }
+  toggleBadgeVisibilityv() {
     this.hidden = !this.hidden;
   }
 
@@ -44,10 +57,11 @@ export class AppComponent {
     public dialog : MatDialog,
     public   user: DhisdataService ,
     public dataset : DatasetService,
-    public messages : MessageserviceService
+    public messages : MessageserviceService,
     
-    
-) {
+   ) {
+
+    // this.pdata.count = this.privatecount
     // this language will be used as a fallback when a translation isn't found in the current language
     this.translate.setDefaultLang('en');
 
@@ -64,6 +78,10 @@ export class AppComponent {
     }
   }
   ngOnInit() {
+    this.getmessagesprivate()
+    this.getmessagesticket()
+    this.getmessagessystem()
+    this.getmessagesvalidation()
   }  
   getdataset(){
   }
@@ -82,6 +100,64 @@ openDialog(){
  openuserDialog(){
   this.dialog.open(CreateuserComponent);
 }
+opencomposeDialog(){
+  this.dialog.open(ComposemessageComponent);
+}
+
+getmessagesprivate(){
+
+  return this.messages.getPrivateFeedback().subscribe((data : {})=>{
+      console.log(data)
+
+      this.messagedata= data ['messageConversations']
+
+      this.pcount = this.messagedata.length
+
+      this.pcount = this.pcount
+
+    })
+    }
+    getmessagesvalidation(){
+
+      return this.messages.getValidationFeedback().subscribe((data : {})=>{
+          console.log(data)
+    
+          this.messagedata= data ['messageConversations']
+    
+          this.vcount = this.messagedata.length
+    
+          this.vcount = this.vcount
+    
+        })
+        }
+        getmessagessystem(){
+
+          return this.messages.getSystemFeedback().subscribe((data : {})=>{
+              console.log(data)
+        
+              this.messagedata= data ['messageConversations']
+        
+              this.scount = this.messagedata.length
+        
+              this.scount = this.scount
+        
+            })
+            }
+            getmessagesticket(){
+
+              return this.messages.getaFeedback().subscribe((data : {})=>{
+                  console.log(data)
+            
+                  this.messagedata= data ['messageConversations']
+            
+                  this.tcount = this.messagedata.length
+            
+                  this.tcount = this.tcount
+            
+                })
+                }
+          
+      
   
 }
 
