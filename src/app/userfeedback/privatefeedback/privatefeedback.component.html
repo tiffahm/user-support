@@ -29,34 +29,42 @@
           
           <mat-icon>feedback</mat-icon>
         <span class="spacer"></span>
+           {{messagedata.created}}
           <button mat-raised-button color="warn">DELETE</button>
         </mat-panel-description>
       </mat-expansion-panel-header>
-  
-      <mat-card>
-        <P>we want the auction to be bid</P>
-      </mat-card>
-      <mat-card  style="margin-top: 10px;">
-  
+          <div  *ngIf="displaymessage">
+            <div   fxLayout="row" fxLayoutAlign="start start">
+              <mat-icon>account_circle</mat-icon>
+              {{messagedata.user?.name}} 
+            </div>
+            <p> {{textmessages}}</p>
+            
+
+          </div>
+      
+
+      <form class="example-form"  [formGroup]="myForm" (ngSubmit)="submitForm()">
+
         <mat-form-field class="example-full-width"  appearance="outline">
           <mat-label>write a Text</mat-label>
-          <textarea matInput rows="5" cols="50" placeholder="text"  ></textarea>
+          <textarea matInput rows="5" cols="50" placeholder="text"   [(ngModel)]="textmessages" ></textarea>
     
         </mat-form-field>
-        <button mat-raised-button  color="primary">REPLY</button>
+        <button mat-raised-button  color="primary" >Submit</button>
+      
         <button mat-stroked-button  style="margin-left: 10px;">DISCARD</button>
         <button mat-stroked-button  style="margin-left: 10px;"> <mat-icon>
           attach_file
         </mat-icon> 
           ATTACHMENT</button>
-  
-  
-  
-      </mat-card>
-           
+
+        </form> 
       <mat-action-row>
         <button mat-stroked-button  color="warn">Reject</button>
         <button mat-button color="primary">Accept</button>
       </mat-action-row>
+      
+
     </mat-expansion-panel>
   </mat-accordion>

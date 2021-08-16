@@ -12,3 +12,6 @@
       width: 500px;
       height: 500px;
   }
+  .mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }

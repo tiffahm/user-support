@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgxDhis2HttpClientService } from '@iapps/ngx-dhis2-http-client';
 import { MessageserviceService } from '../services/messageservice.service';
+import { makeID } from '../shared/helpers/make-id.helper';
 
 
 
@@ -19,9 +22,13 @@ export class UserfeedbackComponent implements OnInit {
   }
 
 messagedata : any [  ] 
+myForm: FormGroup;
 
 
-  constructor( public messages : MessageserviceService) { }
+  constructor( public messages : MessageserviceService , 
+               public fb: FormBuilder,
+               private sendmessages :  NgxDhis2HttpClientService
+               ) { }
 
   ngOnInit(){
    this.getmessages()
@@ -44,9 +51,9 @@ messagedata : any [  ]
 
       return this.messages.deletemessage().subscribe((data : {})=>{
         console.log(data)
-
-
-      })
+           })
 
     }
+
+   
 }
