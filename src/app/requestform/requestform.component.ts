@@ -13,10 +13,11 @@ import { makeID } from '../shared/helpers/make-id.helper';
   styleUrls: ['./requestform.component.css']
 })
 export class RequestformComponent implements OnInit {
-
+  isDataAvailable:boolean = false;
   selectedunits = ''
   selecteddatasets= ''
   selecterdataset = ''
+  loadingunits =false 
   myForm: FormGroup;
   durationInSeconds = 2;
 
@@ -39,24 +40,27 @@ export class RequestformComponent implements OnInit {
 
     organizationunit: ['',[Validators.required]],
     datasetsunit: ['',[Validators.required]],
-    text : ['',[Validators.required]],
+    
       
   })
         throw new Error('Method not implemented.');
   }
 
   getunits(){
+    this.isDataAvailable = true
 
-    return  this.units.getorganizationunits().subscribe((data : {}) =>{
-
+       return this.units.getorganizationunits().subscribe((data : {}) =>{
+         
       console.log(data)
 
        this.selectedunits = data ['organisationUnits']
-   })
+       })
 
   }
   getdatasets() {
+  
 
+    this.isDataAvailable = true
     return this.datasets.getAllDataSets().subscribe((data)=>{
 
       this.selecteddatasets = data ['dataSets']
@@ -71,23 +75,14 @@ export class RequestformComponent implements OnInit {
   submitForm(){
 
     const requestPayload =  {
-      id : makeID(),
-      "action": "add the following to the " + this.myForm.get("organizationunit").value ,
-      "method": "PUT",
-      "payload": {
-        "id": Math.random().toString(36).substr(2, 5),
-        "name": this.myForm.get("datasetsunit").value,
-        "organisationUnits": [
-          {
-            "id": this.myForm.get("organizationunit").value,
-          },
-         ],
-        "periodType": "Monthly"
-      },
-      "status": "OPEN",
-      "url": "api/dataSets/"
+      "subject": "AOÛ_GrT:REQUEST FOR APROVAL CHANGE IN DATASET",
+      "text": "There is request to update datasets to ," +this.myForm.get('organizationunit').value+"  were added " + this.myForm.get('datasetsunit').value +"",
+      "userGroups": [
+        {
+          "id": "QYrzIjSfI8z"
+        }
+      ]
     }
-
     
 
     console.log(this.myForm)
@@ -98,7 +93,7 @@ export class RequestformComponent implements OnInit {
     )
 
     
-    this.request.post('dataStore/UserSupportApp/'+requestPayload.id+'.json',requestPayload).subscribe(
+    this.request.post('messageConversations?messageType=TICKET&messageConversationStatus=OPEN',requestPayload).subscribe(
       (response) => console.log(response),
       (error) => console.log(error)
     )

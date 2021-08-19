@@ -1,40 +1,42 @@
-<form class="example-form " style="width: 1000px;"  [formGroup]="myForm" (ngSubmit)="submitForm()">
-<div >
-  <h2 mat-dialog-title>  Create a request form </h2>
-  <mat-dialog-content class="mat-typography" >
-  
-  
-    <div  fxLayout="column" fxLayoutAlign="center center"  >
-         
-           <mat-form-field appearance="fill" class="example-form">
-             <mat-label>Select organization units</mat-label>
-             <mat-select formControlName="organizationunit">
-              <mat-option [value] ="selectedunits.displayName" *ngFor="let selectedunits of selectedunits"> {{selectedunits.displayName}} </mat-option>
-             </mat-select>
-           </mat-form-field>
-       
-               <mat-form-field appearance="fill" class ="example-full-width">
-                <mat-label>Select dataset</mat-label>
-                <mat-select formControlName="datasetsunit" multiple>
-                  <mat-option  [value]= "selecteddatasets.displayName" *ngFor="let selecteddatasets of selecteddatasets" >{{selecteddatasets.displayName}} </mat-option>
-                </mat-select>
-              </mat-form-field>
 
-              <mat-form-field class="example-full-width"  appearance="fill">
-                <mat-label>write a feedback</mat-label>
-                <textarea matInput rows="5" cols="20" placeholder="text"  formControlName="text"></textarea>
-              
-              </mat-form-field>
-             
-              </div>
+<div  *ngIf="isDataAvailable">
   
-  </mat-dialog-content>
-  <mat-dialog-actions align="end">
-    <button mat-raised-button  color="primary"   (click) ="submitForm()" (click)=" openSnackBar()"  matDialogClose="yes">Submit</button>
-  </mat-dialog-actions>
+  <form class="example-form " style="width: 1000px;"  [formGroup]="myForm" (ngSubmit)="submitForm()">
+    <div >
+      <h2 mat-dialog-title>  Create a Request form </h2>
+      <mat-dialog-content class="mat-typography" >
+      
+      
+        <div  fxLayout="column" fxLayoutAlign="center center"  >
+             
+               <mat-form-field appearance="fill" class="example-form">
+                 <mat-label>Select organization units</mat-label>
+                 <mat-select formControlName="organizationunit">
+                  <mat-option [value] ="selectedunits.displayName" *ngFor="let selectedunits of selectedunits"> {{selectedunits.displayName}} </mat-option>
+                 </mat-select>
+               </mat-form-field>
+           
+                   <mat-form-field appearance="fill" class ="example-full-width">
+                    <mat-label>Select dataset</mat-label>
+                    <mat-select formControlName="datasetsunit" multiple>
+                      <mat-option  [value]= "selecteddatasets.displayName" *ngFor="let selecteddatasets of selecteddatasets" >{{selecteddatasets.displayName}} </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+    
+               
+                 
+                  </div>
+      
+      </mat-dialog-content>
+      <mat-dialog-actions align="end">
+        <button mat-raised-button  color="primary"   (click) ="submitForm()" (click)=" openSnackBar()"  matDialogClose="yes">Submit</button>
+      </mat-dialog-actions>
+    </div>
+    
+    </form>
 </div>
 
-</form>
+
 
 
 

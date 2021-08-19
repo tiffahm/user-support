@@ -1,4 +1,4 @@
-<mat-accordion>
+<mat-accordion >
 
     <!-- <table  class="table table-bordered">
   
@@ -18,8 +18,7 @@
   
           
     <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle  *ngFor="let messagedata of messagedata">
-      <mat-expansion-panel-header>
-    
+      <mat-expansion-panel-header> 
         <mat-panel-title >
           <mat-icon>account_circle</mat-icon>
            {{messagedata.user?.name}}
@@ -39,27 +38,23 @@
               {{messagedata.user?.name}} 
             </div>
             <p> {{textmessages}}</p>
-            
-
           </div>
-      
+    <div  *ngIf="started">  {{messagetsata.subject}}</div>
 
-      <form class="example-form"  [formGroup]="myForm" (ngSubmit)="submitForm()">
+<mat-card>   {{messagesdata | json }}</mat-card>
+
+      <!-- <form class="example-form"  [formGroup]="myForm" (ngSubmit)="submitForm()">
 
         <mat-form-field class="example-full-width"  appearance="outline">
           <mat-label>write a Text</mat-label>
-          <textarea matInput rows="5" cols="50" placeholder="text"   [(ngModel)]="textmessages" ></textarea>
-    
+          <textarea matInput rows="5" cols="50" placeholder="text"  formControlName ="text" ></textarea>
+          <input    #file type="file" accept="image/*" (change)="upload(file.files)">
         </mat-form-field>
         <button mat-raised-button  color="primary" >Submit</button>
       
         <button mat-stroked-button  style="margin-left: 10px;">DISCARD</button>
-        <button mat-stroked-button  style="margin-left: 10px;"> <mat-icon>
-          attach_file
-        </mat-icon> 
-          ATTACHMENT</button>
-
-        </form> 
+      </form> -->
+       
       <mat-action-row>
         <button mat-stroked-button  color="warn">Reject</button>
         <button mat-button color="primary">Accept</button>

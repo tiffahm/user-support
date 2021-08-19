@@ -1,8 +1,10 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxDhis2HttpClientService } from '@iapps/ngx-dhis2-http-client';
 import { observable } from 'rxjs';
+import { DhisdataService } from 'src/app/services/dhisdata.service';
 import { MessageserviceService } from 'src/app/services/messageservice.service';
 import { makeID } from 'src/app/shared/helpers/make-id.helper';
 
@@ -14,6 +16,9 @@ import { makeID } from 'src/app/shared/helpers/make-id.helper';
 export class PrivatefeedbackComponent implements OnInit {
   displaymessage= false
   textmessages = ""
+  loadingprivate = false
+  sender="";
+  started=false
   
   msg: any [] = []
   count : number
@@ -26,32 +31,46 @@ export class PrivatefeedbackComponent implements OnInit {
      
   gettext( event : Event){
 
-   
+    this.displaymessage = true
 
     return this.textmessages  = (<HTMLTextAreaElement>event.target).value;
 
-    this.displaymessage = true
+    
 
 
   }
 
-messagedata : any [  ] 
+messagedata : any [  ]
+
+
 
 
   constructor( public messages : MessageserviceService,
                public fb: FormBuilder,
-               private sendmessages :  NgxDhis2HttpClientService
+               private sendmessages :  NgxDhis2HttpClientService,
+               public users : DhisdataService
+              
     ) { }
 
   ngOnInit(){
    this.getmessages()
 
    this.reactiveForm()
+   this.getsender()
    
   
     
   }
+  getsender(){
+  
+   if (this.users.getUsers().subscribe((data)=>{
+  
+      console.log(data)
 
+    this.sender = data['users']
+   })) 
+    this.loadingprivate = true
+  }
 
   getmessages(){
 
@@ -59,8 +78,7 @@ messagedata : any [  ]
         console.log(data)
 
         this.messagedata= data ['messageConversations']
-
-        this.count = this.messagedata.length
+          this.count = this.messagedata.length
 
         this.count = this.count
 
@@ -73,36 +91,76 @@ messagedata : any [  ]
       reactiveForm() {
         this.myForm =  this.fb.group({
              text : ['',[Validators.required]],
+            subject : ['',[Validators.required]],
+             
            
            })
             throw new Error('Method not implemented.');
       }
   
       submitForm(){
-  
-        const messagePayload = {
-             id: makeID(),
-             "sender" : '',
-            " from " : "",
-            "text": this.myForm.get("text").value,
-            "users": [],
-            "userGroups": [
-             {"id": "QYrzIjSfI8z"}
+
+
+        const messagePayload = 
+           
+
+          {
+            "subject": this.myForm.get('text').value,
+            "text":this.myForm.get('text').value,
+            "users": [
+              {
+                "id": "OYLGMiazHtW"
+              },
+              {
+                "id": "N3PZBUlN8vq"
+              }
             ],
-            "organisationUnits": [""],
-            "status": "OPEN",
-            "url": "api/messagesConversation"
-    
+            "userGroups": [
+              {
+                "id": "ZoHNWQajIoe"
+              }
+            ],
+            "organisationUnits": [
+              {
+                "id": "DiszpKrYNg8"
+              }
+            ]
           }
+
+
+        
+  
+        // const messagePayload = {
+        //     //  id: makeID(),
+        //     //   "messageType": "PRIVATE",
+        //     //   "subject": this.myForm.get('text').value,
+        //     //   "user": {
+        //     //     "displayName": this.messagedata.values,
+        //     //     "name": "Didier Konan",
+        //     //     "id": "I9fMsY4pRKk",
+        //     //     "username": "konan"
+        //     //   }
+        //      "sender" : '',
+        //     " from " : "",
+        //     "text": this.myForm.get("text").value,
+        //     "users": [],
+        //     "userGroups": [
+        //      {"id": "QYrzIjSfI8z"}
+        //     ],
+        //     "organisationUnits": [""],
+        //     "status": "OPEN",
+        //     "url": "api/messagesConversation"
+    
+        //   }
        
         
-          this.sendmessages.post('messageConversitions.json', messagePayload).subscribe(
+          // this.sendmessages.post('messageConversations.json', messagePayload).subscribe(
+          //   (response) => console.log(response),
+          //   (error) => console.log(error)
+          // )
+          this.sendmessages.post('messageConversations/qXF4GmtZZrE', messagePayload).subscribe(
             (response) => console.log(response),
-            (error) => console.log(error)
-          )
-          this.sendmessages.post('dataStore/UserSupportApp/' + messagePayload.id + '.json', messagePayload).subscribe(
-            (response) => console.log(response),
-            (error) => console.log(error)
+            (error) => console.log(error) 
           )
       
         
@@ -118,30 +176,32 @@ messagedata : any [  ]
         deletemessages(){
 
 
-          const messagePayload = {
-            id: makeID(),
-            "sender" : this.getmessages(),
-           " from " : "",
-           "text": this.myForm.get("text").value,
-           "users": [],
-           "userGroups": [
-            {"id": "QYrzIjSfI8z"}
-           ],
-           "organisationUnits": [""],
-           "status": "OPEN",
-           "url": "api/messagesConversation/" +this.messagedata
+        //   const messagePayload = {
+        //     id: makeID(),
+        //     "sender" : this.getmessages(),
+        //    " from " : "",
+        //    "text": this.myForm.get("text").value,
+        //    "users": [],
+        //    "userGroups": [
+        //     {"id": "QYrzIjSfI8z"}
+        //    ],
+        //    "organisationUnits": [""],
+        //    "status": "OPEN",
+        //    "url": "api/messagesConversation/" +this.messagedata
    
-         }
+        //  }
 
-          return this.sendmessages.delete('messageConversations' + messagePayload.id + '.json',).subscribe( 
-          (response) => console.log(response),
-          (error) => console.log(error)
-          )
-        }
+        //   return this.sendmessages.delete('messageConversations' + messagePayload.id + '.json',).subscribe( 
+        //   (response) => console.log(response),
+        //   (error) => console.log(error)
+        //   )
+        // }
     
+}
 
-     
 
 
-    
+
+
+
 }

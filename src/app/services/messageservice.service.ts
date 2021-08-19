@@ -36,7 +36,7 @@ getaFeedback(){
 
 getPrivateFeedback(){
        
-  return this.feedback.get('messageConversations.json?fields=created,user,subject,messageType&filter=messageType:eq:PRIVATE')
+  return this.feedback.get('messageConversations.json?fields=*,assignee%5Bid%2C%20displayName%5D,messages%5B*%2Csender%5Bid%2CdisplayName%5D,attachments%5Bid%2C%20name%2C%20contentLength%5D%5D,userMessages%5Buser%5Bid%2C%20displayName%5D%5D&filter=messageType:eq:PRIVATE')
   .pipe(
     retry(1),
     catchError(this.httpError)
