@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { NgxDhis2HttpClientService } from '@iapps/ngx-dhis2-http-client';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { catchError, map, retry } from 'rxjs/operators';
+import { MessageConversation } from '../shared/messageconversation';
 export interface User {
   subject : string
   text : string
@@ -12,11 +13,17 @@ export interface User {
 })
 export class MessageserviceService {
 
+  messageconversation:  Observable<MessageConversation[]>
+
+   
+
   
   user : String;
 
 
   constructor( public provider : HttpClient , private feedback :  NgxDhis2HttpClientService) { 
+
+  
 
     
   }
@@ -26,7 +33,7 @@ export class MessageserviceService {
 
 getaFeedback(){
        
-  return this.feedback.get('messageConversations.json?fields=created,user,subject,messageType&filter=messageType:eq:TICKET')
+  return this.feedback.get('messageConversations.json?fields=*,assignee%5Bid%2C%20displayName%5D,messages%5B*%2Csender%5Bid%2CdisplayName%5D,attachments%5Bid%2C%20name%2C%20contentLength%5D%5D,userMessages%5Buser%5Bid%2C%20displayName%5D%5D&filter=messageType:eq:TICKET')
   .pipe(
     retry(1),
     catchError(this.httpError)
@@ -34,11 +41,12 @@ getaFeedback(){
  
 }
 
-getPrivateFeedback(){
+getPrivateFeedback(): Observable<MessageConversation[]> {
        
   return this.feedback.get('messageConversations.json?fields=*,assignee%5Bid%2C%20displayName%5D,messages%5B*%2Csender%5Bid%2CdisplayName%5D,attachments%5Bid%2C%20name%2C%20contentLength%5D%5D,userMessages%5Buser%5Bid%2C%20displayName%5D%5D&filter=messageType:eq:PRIVATE')
   .pipe(
     retry(1),
+    map((res) => res?.messageConversations),
     catchError(this.httpError)
      )
  
@@ -46,7 +54,7 @@ getPrivateFeedback(){
 
 getSystemFeedback(){
        
-  return this.feedback.get('messageConversations.json?fields=created,user,subject,messageType&filter=messageType:eq:SYSTEM')
+  return this.feedback.get('messageConversations.json?fields=*,assignee%5Bid%2C%20displayName%5D,messages%5B*%2Csender%5Bid%2CdisplayName%5D,attachments%5Bid%2C%20name%2C%20contentLength%5D%5D,userMessages%5Buser%5Bid%2C%20displayName%5D%5D&filter=messageType:eq:SYSTEM')
   .pipe(
     retry(1),
     catchError(this.httpError)
@@ -55,7 +63,7 @@ getSystemFeedback(){
 }
 getValidationFeedback(){
        
-  return this.feedback.get('messageConversations.json?fields=created,user,subject,messageType&filter=messageType:eq:VALIDATION_RESULT')
+  return this.feedback.get('messageConversations.json?fields=*,assignee%5Bid%2C%20displayName%5D,messages%5B*%2Csender%5Bid%2CdisplayName%5D,attachments%5Bid%2C%20name%2C%20contentLength%5D%5D,userMessages%5Buser%5Bid%2C%20displayName%5D%5D&filter=messageType:eq:VALIDATION_RESULT')
   .pipe(
     retry(1),
     catchError(this.httpError)

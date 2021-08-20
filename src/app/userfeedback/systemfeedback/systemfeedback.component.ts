@@ -15,6 +15,8 @@ export class SystemfeedbackComponent implements OnInit {
     this.step = index;
   }
 
+  messegages : any []
+
 messagedata : any [  ] 
 
 
@@ -32,6 +34,8 @@ messagedata : any [  ]
         console.log(data)
 
         this.messagedata= data ['messageConversations']
+        
+
         this.count = this.messagedata.length
        })
 

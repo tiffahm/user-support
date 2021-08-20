@@ -76,7 +76,7 @@ export class RequestformComponent implements OnInit {
 
     const requestPayload =  {
       "subject": "AOÛ_GrT:REQUEST FOR APROVAL CHANGE IN DATASET",
-      "text": "There is request to update datasets to ," +this.myForm.get('organizationunit').value+"  were added " + this.myForm.get('datasetsunit').value +"",
+      "text": "There is request to update datasets to ," +this.myForm.get('organizationunit').value+"  add the follwing data " + this.myForm.get('datasetsunit').value +"",
       "userGroups": [
         {
           "id": "QYrzIjSfI8z"

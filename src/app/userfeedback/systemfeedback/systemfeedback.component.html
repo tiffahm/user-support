@@ -28,6 +28,7 @@
         <mat-panel-description>
           Subject :{{messagedata.subject}}
          
+         
           <mat-icon>feedback</mat-icon>
         <span class="spacer"></span>
           
@@ -36,24 +37,13 @@
       </mat-expansion-panel-header>
   
       <mat-card>
+
+        {{messagedata.messages}}
         <P>we want the auction to be bid</P>
-      </mat-card>
-      <mat-card  style="margin-top: 10px;">
-  
-        <mat-form-field class="example-full-width"  appearance="outline">
-          <mat-label>write a Text</mat-label>
-          <textarea matInput rows="5" cols="50" placeholder="text"  ></textarea>
     
-        </mat-form-field>
-        <button mat-raised-button  color="primary">REPLY</button>
-        <button mat-stroked-button  style="margin-left: 10px;">DISCARD</button>
-        <button mat-stroked-button  style="margin-left: 10px;"> <mat-icon>
-          attach_file
-        </mat-icon> 
-          ATTACHMENT</button>
-  
-  
-  
+      {{messagedata.messages | json}}
+     
+
       </mat-card>
            
       <mat-action-row>
