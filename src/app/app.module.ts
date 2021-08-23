@@ -36,6 +36,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import {MatBadgeModule} from '@angular/material/badge';
 
+import {MatTreeModule} from '@angular/material/tree';
+
 import { NotificationComponent } from './notification/notification.component';
 import { CreateuserComponent } from './createuser/createuser.component';
 import { UserfeedbackComponent } from './userfeedback/userfeedback.component';
@@ -85,6 +87,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     MatExpansionModule,
     RoutingModule,
+    MatTreeModule,
     CoreModule,
     BrowserAnimationsModule,
     MatBadgeModule,

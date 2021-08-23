@@ -8,18 +8,55 @@
       
       
         <div  fxLayout="column" fxLayoutAlign="center center"  >
+
+               
+
+
+          <!-- <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+            <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+              <button mat-icon-button disabled></button>
+              <mat-checkbox class="checklist-leaf-node"
+                            [checked]="checklistSelection.isSelected(node)"
+                            (change)="todoLeafItemSelectionToggle(node)">{{node.item}}</mat-checkbox>
+            </mat-tree-node>
+          
+            <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding>
+              <button mat-icon-button disabled></button>
+              <mat-form-field appearance="fill">
+                <mat-label>New item...</mat-label>
+                <input matInput #itemValue placeholder="Ex. Lettuce">
+              </mat-form-field>
+              <button mat-button (click)="saveNode(node, itemValue.value)">Save</button>
+            </mat-tree-node>
+          </mat-tree> -->
              
                <mat-form-field appearance="fill" class="example-form">
                  <mat-label>Select organization units</mat-label>
                  <mat-select formControlName="organizationunit">
-                  <mat-option [value] ="selectedunits.displayName" *ngFor="let selectedunits of selectedunits"> {{selectedunits.displayName}} </mat-option>
+                  <mat-option [value] ="selecteditem.name" *ngFor="let selecteditem of selectedunits"> {{selecteditem.name}}   
+
+                    <mat-select   multiple >
+                      <mat-option  *ngFor="let selecteddata of selecteddatasets"> 
+                         <div      *ngFor="let data of selecteditem.dataSets"  >
+                          <div *ngIf="selecteddata.id == data.id ">
+                            {{selecteddata.id}} 
+                          </div>
+                         </div>  
+                      
+                      </mat-option>
+                     
+                  </mat-select>
+
+              </mat-option>
+                         
+                           
                  </mat-select>
                </mat-form-field>
            
                    <mat-form-field appearance="fill" class ="example-full-width">
                     <mat-label>Select dataset</mat-label>
                     <mat-select formControlName="datasetsunit" multiple>
-                      <mat-option  [value]= "selecteddatasets.displayName" *ngFor="let selecteddatasets of selecteddatasets" >{{selecteddatasets.displayName}} </mat-option>
+                      <mat-option  [value]= "selecteddata.displayName" *ngFor="let selecteddata of selecteddatasets" >{{selecteddata.displayName}} </mat-option>
                     </mat-select>
                   </mat-form-field>
     

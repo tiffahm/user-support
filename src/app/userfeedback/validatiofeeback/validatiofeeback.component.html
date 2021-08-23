@@ -17,7 +17,7 @@
   
   
           
-    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle  *ngFor="let messagedata of messagedata">
+    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle  *ngFor="let messageItem of messagedata">
       <mat-expansion-panel-header>
     
         <mat-panel-title >
@@ -27,7 +27,7 @@
            Validation
         </mat-panel-title>
         <mat-panel-description>
-          Subject :{{messagedata.subject}}
+          Subject :{{messageItem.subject}}
           
           <mat-icon>feedback</mat-icon>
         <span class="spacer"></span>
@@ -36,19 +36,10 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
   
-      <mat-card>
-        <mat-icon>account_circle</mat-icon>
-        {{messagedata.user?.name}}
-        <P>we want the auction to be bid</P>
-      </mat-card>
-      <mat-card  style="margin-top: 10px;">
-  
-        {{messagedata.messages | json }}
-      
-  
-  
-  
-      </mat-card>
+      <div *ngFor=" let message of messageItem.messages" >
+        {{message.name}}
+       </div>
+       
            
       <mat-action-row>
         <button mat-stroked-button  color="warn">Reject</button>

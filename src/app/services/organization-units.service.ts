@@ -8,12 +8,12 @@ export class OrganizationUnitsService {
 
   constructor( private organizationunits : NgxDhis2HttpClientService ) { }
 
-  endEpoint='http://play.dhis2.org/demo/api/organisationUnits'
+  // endEpoint='https://play.dhis2.org/2.35.6/api/organisationUnits.json?fields=dataSets,id,name'
 
 
   getorganizationunits(){
        
-    return this.organizationunits.get('organisationUnits.json')
+    return this.organizationunits.get('organisationUnits.json?fields=dataSets,id,name')
          
   }
 

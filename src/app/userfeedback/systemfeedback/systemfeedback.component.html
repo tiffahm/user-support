@@ -17,16 +17,16 @@
   
   
           
-    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle  *ngFor="let messagedata of messagedata">
+    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle  *ngFor="let messageItem of messagedata">
       <mat-expansion-panel-header>
     
         <mat-panel-title >
           <mat-icon>account_circle</mat-icon>
-           {{messagedata.user?.name}}
-           {{messagedata.messageType}}
+           {{messageItem.user?.name}}
+           {{messageItem.messageType}}
         </mat-panel-title>
         <mat-panel-description>
-          Subject :{{messagedata.subject}}
+          Subject :{{messageItem.subject}}
          
          
           <mat-icon>feedback</mat-icon>
@@ -35,16 +35,14 @@
           <button mat-raised-button color="warn">DELETE </button>
         </mat-panel-description>
       </mat-expansion-panel-header>
+
+
+      <div *ngFor=" let message of messageItem.messages" >
+        {{message.name}}
+       </div>
+       
   
-      <mat-card>
-
-        {{messagedata.messages}}
-        <P>we want the auction to be bid</P>
-    
-      {{messagedata.messages | json}}
      
-
-      </mat-card>
            
       <mat-action-row>
         <button mat-stroked-button  color="warn">Reject</button>
