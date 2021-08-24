@@ -21,7 +21,7 @@
       <mat-expansion-panel-header> 
         <mat-panel-title >
           <mat-icon>account_circle</mat-icon>
-           {{messageItem.user?.name}}
+           {{messageItem.user?.displayName}}
           </mat-panel-title>
         <mat-panel-description  >
           Subject :{{messageItem.subject}}
@@ -36,10 +36,13 @@
 
       
 
-
-       <div *ngFor=" let message of messageItem.messages" >
-        {{message.name}}
-       </div>
+         <mat-card>
+          <div *ngFor=" let message of messageItem.messages" >
+            <mat-icon>account_circle</mat-icon>  {{message.sender.displayName}} <br>
+           {{message.name}}
+          </div>
+         </mat-card>
+      
        
    
          

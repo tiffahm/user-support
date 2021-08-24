@@ -1,5 +1,10 @@
 
-<div  *ngIf="isDataAvailable">
+<div  >
+  <ng-container *ngIf="isDataAvailable">
+
+  
+  
+
   
   <form class="example-form " style="width: 1000px;"  [formGroup]="myForm" (ngSubmit)="submitForm()">
     <div >
@@ -32,36 +37,54 @@
              
                <mat-form-field appearance="fill" class="example-form">
                  <mat-label>Select organization units</mat-label>
-                 <mat-select formControlName="organizationunit">
+                 <mat-select formControlName="organizationunit"  [(ngModel)]="orgunits.name">
                   <mat-option [value] ="selecteditem.name" *ngFor="let selecteditem of selectedunits"> {{selecteditem.name}}   
 
-                    <mat-select   multiple >
+                    <!-- <mat-select    >
                       <mat-option  *ngFor="let selecteddata of selecteddatasets"> 
                          <div      *ngFor="let data of selecteditem.dataSets"  >
-                          <div *ngIf="selecteddata.id == data.id ">
-                            {{selecteddata.id}} 
+                          <div *ngIf="selecteddata.id==data.id">
+
+                            <mat-checkbox class="example-margin"  > {{selecteddata.displayName}} </mat-checkbox>
+                          
                           </div>
                          </div>  
                       
                       </mat-option>
                      
-                  </mat-select>
+                  </mat-select> -->
 
-              </mat-option>
-                         
-                           
+                  <!-- *ngFor="let data of dataset " >{{ data.displayName}} -->
+
+              </mat-option>       
                  </mat-select>
-               </mat-form-field>
-           
-                   <mat-form-field appearance="fill" class ="example-full-width">
+               </mat-form-field >
+                  <mat-form-field appearance="fill"  class="example-form"   >
                     <mat-label>Select dataset</mat-label>
                     <mat-select formControlName="datasetsunit" multiple>
-                      <mat-option  [value]= "selecteddata.displayName" *ngFor="let selecteddata of selecteddatasets" >{{selecteddata.displayName}} </mat-option>
+
+                      <!-- {{selecteditem.dataSets | json}} -->
+
+                        <ng-container  *ngFor="let selecteditem of selectedunits" >
+
+                          <ng-container *ngFor="let dset of selecteditem.dataSets">
+                                           
+                            <mat-option   *ngIf="" >  {{dset.id}}               </mat-option>
+
+                          </ng-container>
+                          
+
+                       
+
+                        </ng-container>
+                         
+                        
+                         
                     </mat-select>
-                  </mat-form-field>
-    
-               
-                 
+
+                  </mat-form-field> 
+
+                  <!-- <app-dataset></app-dataset> -->
                   </div>
       
       </mat-dialog-content>
@@ -71,6 +94,7 @@
     </div>
     
     </form>
+  </ng-container>
 </div>
 
 

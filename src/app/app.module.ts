@@ -51,6 +51,7 @@ import { SystemfeedbackComponent } from './userfeedback/systemfeedback/systemfee
 import { ValidatiofeebackComponent } from './userfeedback/validatiofeeback/validatiofeeback.component';
 import { PrivatefeedbackComponent } from './userfeedback/privatefeedback/privatefeedback.component';
 import { ComposemessageComponent } from './composemessage/composemessage.component';
+import { DatasetComponent } from './dataset/dataset.component';
 
 
 
@@ -70,7 +71,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 
 @NgModule({
-  declarations: [AppComponent, ResetpasswordComponent, RequestformComponent, BottomSheetOverviewExampleComponent, NotificationComponent, CreateuserComponent, UserfeedbackComponent, WritefeedbackComponent, SystemfeedbackComponent, ValidatiofeebackComponent, PrivatefeedbackComponent, ComposemessageComponent],
+  declarations: [AppComponent, ResetpasswordComponent, RequestformComponent, BottomSheetOverviewExampleComponent, NotificationComponent, CreateuserComponent, UserfeedbackComponent, WritefeedbackComponent, SystemfeedbackComponent, ValidatiofeebackComponent, PrivatefeedbackComponent, ComposemessageComponent, DatasetComponent],
   imports: [
     MatPaginatorModule,
     FormsModule,

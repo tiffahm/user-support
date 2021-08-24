@@ -10,32 +10,51 @@ import {SelectionModel} from '@angular/cdk/collections';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
 import {BehaviorSubject} from 'rxjs'
+import { UserGroupsService } from '../services/user-groups.service';
 @Component({
   selector: 'app-requestform',
   templateUrl: './requestform.component.html',
   styleUrls: ['./requestform.component.css']
 })
+
 export class RequestformComponent implements OnInit {
 
+  selection_mode: 'orgUnit'
+  selected_level: ''
+  show_update_button: false
+  selected_group: ''
+  orgunit_levels: []
+  orgunit_groups: []
+  selected_orgunits: []
+  user_orgunits: []
+  show_selection_mode: false
+  type: 'report' // can be 'data_entry'
+  selected_user_orgunit: 'USER_ORGUNIT'
 
-  checked = false;
-  indeterminate = false;
-  labelPosition: 'before' | 'after' = 'after';
-  disabled = false;
-  
-  isDataAvailable:boolean = false;
+  checked = true;
+  isDataAvailable = false;
   selectedunits = ''
-  selecteddatasets= ''
+  dataset : string 
   selecterdataset = ''
   loadingunits =false 
   myForm: FormGroup;
   durationInSeconds = 2;
+  selectedgroup: any;
+
+  orgunits = { name :" ", id : "" , dataSets : []}
+  dsets = {id : "",displayName: ""}
+  onOrgUnitSelect: any;
+  loading: boolean;
+  showFilter: boolean;
+  isOrganizationUnitSelected: boolean;
+  assignedDataSets: any;
 
   constructor( public units : OrganizationUnitsService ,
      public fb: FormBuilder ,
-     private datasets : DatasetService,
+     private alldatasets : DatasetService,
      private request : NgxDhis2HttpClientService,
-     private _snackBar: MatSnackBar
+     private _snackBar: MatSnackBar,
+     private usergroups : UserGroupsService
      
      ) { }
 
@@ -43,6 +62,7 @@ export class RequestformComponent implements OnInit {
     this.getunits()
     this.getdatasets()
     this.reactiveForm()
+    this.getuserGroups()
   }
   
   reactiveForm() {
@@ -51,29 +71,52 @@ export class RequestformComponent implements OnInit {
     organizationunit: ['',[Validators.required]],
     datasetsunit: ['',[Validators.required]],
     
+    
       
   })
         throw new Error('Method not implemented.');
   }
 
+  setSelectedOrgunit(event) {
+    this.getSelectedDataSets(event.value);
+  }
+
+  getSelectedDataSets(orgUnitID: string) {
+    this.isOrganizationUnitSelected = true;
+    this.onOrgUnitSelect.emit(this.isOrganizationUnitSelected);
+    this.loading = true;
+    this.showFilter = true;
+    this.units.getOrganisationUnit(orgUnitID).add(response => {
+      
+      this.loading = false;
+      this.assignedDataSets = Object.assign([], response.dataSets);
+    })
+  }
+
+
+
+
   getunits(){
     this.isDataAvailable = true
 
        return this.units.getorganizationunits().subscribe((data : {}) =>{
+
+        this.isDataAvailable = true
          
       console.log(data)
 
        this.selectedunits = data ['organisationUnits']
+      
        })
 
   }
   getdatasets() {
   
 
-    this.isDataAvailable = true
-    return this.datasets.getAllDataSets().subscribe((data)=>{
-
-      this.selecteddatasets = data ['dataSets']
+   
+    return this.alldatasets.getAllDataSets().subscribe((data)=>{
+      this.isDataAvailable = true
+      this.dataset = data ['dataSets']
 
       console.log(data)
 
@@ -81,12 +124,44 @@ export class RequestformComponent implements OnInit {
 
 
   }
+  compareunitsandsets(){
+
+
+
+  }
+
+  getuserGroups(){
+
+    return this.usergroups.getuserGroups().subscribe (( data : {})=>{
+      console.log(data)
+
+      this.selectedgroup = data ['userGroups']
+
+     
+    })
+
+  }
+
+
 
   submitForm(){
 
     const requestPayload =  {
-      "subject": "AOÛ_GrT:REQUEST FOR APROVAL CHANGE IN DATASET",
+      "subject":"REQUEST FOR APROVAL CHANGE IN DATASET",
       "text": "There is request to update datasets to ," +this.myForm.get('organizationunit').value+"  add the follwing data " + this.myForm.get('datasetsunit').value +"",
+      "userGroups": [
+        {
+          "id": "QYrzIjSfI8z"
+        }
+      ]
+    }
+
+    const requestobject =  {
+       id : makeID(),
+      "Action":"REQUEST FOR APROVAL CHANGE IN DATASET",
+      "datasets_added": this.myForm.get('datasetsunit').value,
+      "datasets_removed":  this.myForm.get('datasetsunit').value,
+      "organizationunit": +this.myForm.get('organizationunit').value,
       "userGroups": [
         {
           "id": "QYrzIjSfI8z"
@@ -104,6 +179,10 @@ export class RequestformComponent implements OnInit {
 
     
     this.request.post('messageConversations?messageType=TICKET&messageConversationStatus=OPEN',requestPayload).subscribe(
+      (response) => console.log(response),
+      (error) => console.log(error)
+    )
+    this.request.post('dataStore/UserSupportApp/'+requestobject.id+'.json',requestobject).subscribe(
       (response) => console.log(response),
       (error) => console.log(error)
     )
