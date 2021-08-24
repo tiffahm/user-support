@@ -19,17 +19,7 @@ import { UserGroupsService } from '../services/user-groups.service';
 
 export class RequestformComponent implements OnInit {
 
-  selection_mode: 'orgUnit'
-  selected_level: ''
-  show_update_button: false
-  selected_group: ''
-  orgunit_levels: []
-  orgunit_groups: []
-  selected_orgunits: []
-  user_orgunits: []
-  show_selection_mode: false
-  type: 'report' // can be 'data_entry'
-  selected_user_orgunit: 'USER_ORGUNIT'
+  
 
   checked = true;
   isDataAvailable = false;
@@ -48,6 +38,9 @@ export class RequestformComponent implements OnInit {
   showFilter: boolean;
   isOrganizationUnitSelected: boolean;
   assignedDataSets: any;
+
+  initialdataset : any []
+  finaldataset : any []
 
   constructor( public units : OrganizationUnitsService ,
      public fb: FormBuilder ,
@@ -70,28 +63,13 @@ export class RequestformComponent implements OnInit {
 
     organizationunit: ['',[Validators.required]],
     datasetsunit: ['',[Validators.required]],
-    
+     
     
       
   })
         throw new Error('Method not implemented.');
   }
 
-  setSelectedOrgunit(event) {
-    this.getSelectedDataSets(event.value);
-  }
-
-  getSelectedDataSets(orgUnitID: string) {
-    this.isOrganizationUnitSelected = true;
-    this.onOrgUnitSelect.emit(this.isOrganizationUnitSelected);
-    this.loading = true;
-    this.showFilter = true;
-    this.units.getOrganisationUnit(orgUnitID).add(response => {
-      
-      this.loading = false;
-      this.assignedDataSets = Object.assign([], response.dataSets);
-    })
-  }
 
 
 
@@ -124,11 +102,7 @@ export class RequestformComponent implements OnInit {
 
 
   }
-  compareunitsandsets(){
 
-
-
-  }
 
   getuserGroups(){
 
@@ -189,14 +163,16 @@ export class RequestformComponent implements OnInit {
 
   }
 
-  public errorHandling = (control: string, error: string) => {
-    return this.myForm.controls[control].hasError(error);
-  }
+
   openSnackBar(){
     this._snackBar.openFromComponent(NotificationComponent, {
       duration: this.durationInSeconds * 1000,
     });
 
+  }
+
+  selectingorgunit(event){
+    
   }
 
 }

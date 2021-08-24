@@ -15,7 +15,7 @@ export class DatasetService {
 
   getAllDataSets(){
 
-      return this.dataset.get('dataSets.json')
+      return this.dataset.get('dataSets.json?fields=id,name')
    }
 
 }

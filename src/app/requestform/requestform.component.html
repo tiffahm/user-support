@@ -39,7 +39,34 @@
                  <mat-label>Select organization units</mat-label>
                  <mat-select formControlName="organizationunit"  [(ngModel)]="orgunits.name">
                   <mat-option [value] ="selecteditem.name" *ngFor="let selecteditem of selectedunits"> {{selecteditem.name}}   
+                            
 
+
+                    <mat-select formControlName="datasetsunit" multiple>
+
+                      <!-- {{selecteditem.dataSets | json}} -->
+
+                        <ng-container  *ngFor="let selecteditem of selectedunits" >
+
+                          <ng-container *ngFor="let dset of selecteditem.dataSets">
+
+                            <ng-container *ngFor="let data of  dataset ">
+
+                              <mat-option   *ngIf="(data.id==dset.id)" >     {{data.name}}               </mat-option>
+                              
+                            </ng-container>
+                            
+                                          
+                          </ng-container>
+                          
+
+                       
+
+                        </ng-container>
+                         
+                        
+                         
+                    </mat-select>
                     <!-- <mat-select    >
                       <mat-option  *ngFor="let selecteddata of selecteddatasets"> 
                          <div      *ngFor="let data of selecteditem.dataSets"  >
@@ -68,9 +95,14 @@
                         <ng-container  *ngFor="let selecteditem of selectedunits" >
 
                           <ng-container *ngFor="let dset of selecteditem.dataSets">
-                                           
-                            <mat-option   *ngIf="" >  {{dset.id}}               </mat-option>
 
+                            <ng-container *ngFor="let data of  dataset ">
+
+                              <mat-option   *ngIf="(data.id==dset.id)" >     {{data.name}}               </mat-option>
+                              
+                            </ng-container>
+                            
+                                          
                           </ng-container>
                           
 
