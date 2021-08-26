@@ -20,7 +20,7 @@ import { UserGroupsService } from '../services/user-groups.service';
 export class RequestformComponent implements OnInit {
 
   
-
+  slectedorgunit = ""
   checked = true;
   isDataAvailable = false;
   selectedunits = ''
@@ -56,6 +56,7 @@ export class RequestformComponent implements OnInit {
     this.getdatasets()
     this.reactiveForm()
     this.getuserGroups()
+    this.selectingorgunit(this.selectingorgunit)
   }
   
   reactiveForm() {
@@ -162,6 +163,21 @@ export class RequestformComponent implements OnInit {
     )
 
   }
+
+
+  selectorgunit(event){
+
+
+    this.selectingorgunit  = event
+
+    console.log(this.selectingorgunit)
+    
+
+    
+
+  }
+
+  
 
 
   openSnackBar(){

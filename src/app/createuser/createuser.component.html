@@ -9,7 +9,7 @@
                     <mat-label>Select organization unit</mat-label>
                     <mat-select  formControlName="organizationunit">
                       <mat-option>None</mat-option>
-                      <mat-option [value] ="selectedunits.displayName" *ngFor="let selectedunits of selectedunits"> {{selectedunits.displayName}} </mat-option>
+                      <mat-option [value] ="selectedunit.name" *ngFor="let selectedunit of selectedunits"> {{selectedunit.name}} </mat-option>
                       </mat-select>
                   </mat-form-field>
                               <p >    </p> 

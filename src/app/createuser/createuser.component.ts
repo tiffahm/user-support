@@ -8,6 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { OrganizationUnitsService } from '../services/organization-units.service';
 import { UserrolesService } from '../services/userroles.service';
 import { UserGroupsService } from '../services/user-groups.service';
+import { makeID } from '../shared/helpers/make-id.helper';
 
 
 @Component({
@@ -36,7 +37,8 @@ export class CreateuserComponent implements OnInit  {
      private  user : NgxDhis2HttpClientService,
      private userroles: UserrolesService,
      private usergroups : UserGroupsService,
-     private _snackBar : MatSnackBar
+     private _snackBar : MatSnackBar,
+     private request : NgxDhis2HttpClientService,
    ) { }
 
   
@@ -68,13 +70,25 @@ export class CreateuserComponent implements OnInit  {
 
 
    submitForm(){ 
+
+    const requestPayload =  {
+      id : makeID (),
+      "subject":"REQUEST  FOR USER CREATION",
+      "text": "There is request to create a user in "+this.myForm.get('organizationunit').value+" with the following credentials  "+"\n"+"FIRSTNAME :" +this.myForm.get('firstname').value+"\n"+" LASTNAME :"+this.myForm.get('lastname').value+"\n"+" EMAIL :"+this.myForm.get('email').value+"\n"+" USERGROUP :"+this.myForm.get('usergroupunit').value +"\n"+" USER ROLE : "+this.myForm.get('userroleunit').value,
+      "userGroups": [
+        {
+          "id": "QYrzIjSfI8z"
+        }
+      ]
+    }
+
     const userPayload = {
 
       "action": " create the user with the following credentials...",
       "method": "POST",
       "payLoad" : {
         
-          "id": Math.random().toString(36).substr(2, 5),
+          id: Math.random().toString(36).substr(2, 5),
           "firstName": this.myForm.get("firstname").value,
           "surname": this.myForm.get("lastname").value,
           "email": this.myForm.get("email").value,
@@ -110,8 +124,13 @@ export class CreateuserComponent implements OnInit  {
       (error) => console.log(error)
     )
 
+
+    this.request.post('messageConversations?messageType=PRIVATE&messageConversationStatus=OPEN',requestPayload).subscribe(
+      (response) => console.log(response),
+      (error) => console.log(error)
+    )
     
-    this.user.post('dataStore/UserSupportApp/user1.json',userPayload).subscribe(
+    this.user.post('dataStore/UserSupportApp/'+ requestPayload.id+'.json',userPayload).subscribe(
       (response) => console.log(response),
       (error) => console.log(error)
     )

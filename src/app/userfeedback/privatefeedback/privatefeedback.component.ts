@@ -26,6 +26,7 @@ export class PrivatefeedbackComponent implements OnInit {
   count: number;
   step = 0;
   myForm: FormGroup;
+  status: string;
 
   setStep(index: number) {
     this.step = index;
@@ -43,7 +44,9 @@ export class PrivatefeedbackComponent implements OnInit {
     public messages: MessageserviceService,
     public fb: FormBuilder,
     private sendmessages: NgxDhis2HttpClientService,
-    public users: DhisdataService
+    public users: DhisdataService,
+    public feedback :  NgxDhis2HttpClientService
+    
   ) {}
 
   ngOnInit() {
@@ -51,6 +54,7 @@ export class PrivatefeedbackComponent implements OnInit {
 
     this.reactiveForm();
     this.getsender();
+    this.rejectrequest("messagedataitem.id");
   }
   getsender() {
     if (
@@ -64,12 +68,14 @@ export class PrivatefeedbackComponent implements OnInit {
   }
 
   getmessages() {
+
+
     return this.messages.getPrivateFeedback().subscribe((data: MessageConversation[]) => {
       console.log(data);
-
+    
       // this.messageConversation = JSON.parse(JSON.stringify(data));
 
-     this.messagedata = data;
+      this.messagedata = data;
       this.count = this.messagedata.length;
 
       this.count = this.count;
@@ -149,24 +155,18 @@ export class PrivatefeedbackComponent implements OnInit {
     return this.myForm.controls[control].hasError(error);
   };
 
-  deletemessages() {
-    //   const messagePayload = {
-    //     id: makeID(),
-    //     "sender" : this.getmessages(),
-    //    " from " : "",
-    //    "text": this.myForm.get("text").value,
-    //    "users": [],
-    //    "userGroups": [
-    //     {"id": "QYrzIjSfI8z"}
-    //    ],
-    //    "organisationUnits": [""],
-    //    "status": "OPEN",
-    //    "url": "api/messagesConversation/" +this.messagedata
-    //  }
-    //   return this.sendmessages.delete('messageConversations' + messagePayload.id + '.json',).subscribe(
-    //   (response) => console.log(response),
-    //   (error) => console.log(error)
-    //   )
-    // }
+  
+ rejectrequest(messageid : string ) {
+
+
+  this.feedback.delete("messageConversations.json?fields="+messageid+",assignee%5Bid%2C%20displayName%5D,messages%5B*%2Csender%5Bid%2CdisplayName%5D,attachments%5Bid%2C%20name%2C%20contentLength%5D%5D,userMessages%5Buser%5Bid%2C%20displayName%5D%5D&filter=messageType:eq:VALIDATION_RESULT").
+  subscribe( () => this.status = ' delete succecfully')
+
+  
+  
+  }
+
+  acceptrequest(){
+    
   }
 }

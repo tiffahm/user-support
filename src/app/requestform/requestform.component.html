@@ -37,16 +37,16 @@
              
                <mat-form-field appearance="fill" class="example-form">
                  <mat-label>Select organization units</mat-label>
-                 <mat-select formControlName="organizationunit"  [(ngModel)]="orgunits.name">
+                 <mat-select formControlName="organizationunit"  >
                   <mat-option [value] ="selecteditem.name" *ngFor="let selecteditem of selectedunits"> {{selecteditem.name}}   
                             
 
 
-                    <mat-select formControlName="datasetsunit" multiple>
+                    <!-- <mat-select formControlName="datasetsunit" multiple> -->
 
                       <!-- {{selecteditem.dataSets | json}} -->
 
-                        <ng-container  *ngFor="let selecteditem of selectedunits" >
+                        <!-- <ng-container  *ngFor="let selecteditem of selectedunits" >
 
                           <ng-container *ngFor="let dset of selecteditem.dataSets">
 
@@ -66,7 +66,7 @@
                          
                         
                          
-                    </mat-select>
+                    </mat-select> -->
                     <!-- <mat-select    >
                       <mat-option  *ngFor="let selecteddata of selecteddatasets"> 
                          <div      *ngFor="let data of selecteditem.dataSets"  >
@@ -92,25 +92,12 @@
 
                       <!-- {{selecteditem.dataSets | json}} -->
 
-                        <ng-container  *ngFor="let selecteditem of selectedunits" >
+                     
 
-                          <ng-container *ngFor="let dset of selecteditem.dataSets">
-
-                            <ng-container *ngFor="let data of  dataset ">
-
-                              <mat-option   *ngIf="(data.id==dset.id)" >     {{data.name}}               </mat-option>
+                              <mat-option   *ngFor="let data of  dataset " >     {{data.name}}               </mat-option>
                               
-                            </ng-container>
                             
-                                          
-                          </ng-container>
-                          
-
-                       
-
-                        </ng-container>
-                         
-                        
+    
                          
                     </mat-select>
 
