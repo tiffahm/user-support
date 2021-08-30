@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxDhis2HttpClientService } from '@iapps/ngx-dhis2-http-client';
 import { observable } from 'rxjs';
+import { DatastoreService } from 'src/app/services/datastore.service';
 import { DhisdataService } from 'src/app/services/dhisdata.service';
 import { MessageserviceService } from 'src/app/services/messageservice.service';
 import { makeID } from 'src/app/shared/helpers/make-id.helper';
@@ -44,8 +45,9 @@ export class PrivatefeedbackComponent implements OnInit {
     public messages: MessageserviceService,
     public fb: FormBuilder,
     private sendmessages: NgxDhis2HttpClientService,
-    public users: DhisdataService,
-    public feedback :  NgxDhis2HttpClientService
+    // public users: DhisdataService,
+    public feedback :  NgxDhis2HttpClientService,  
+    public datastore: DatastoreService
     
   ) {}
 
@@ -53,19 +55,19 @@ export class PrivatefeedbackComponent implements OnInit {
     this.getmessages();
 
     this.reactiveForm();
-    this.getsender();
-    this.rejectrequest("messagedataitem.id");
+    // this.getsender();
+    this.rejectrequest()
   }
-  getsender() {
-    if (
-      this.users.getUsers().subscribe((data) => {
-        console.log(data);
+  // getsender() {
+  //   if (
+  //     this.users.getUsers().subscribe((data) => {
+  //       console.log(data);
 
-        this.sender = data['users'];
-      })
-    )
-      this.loadingprivate = true;
-  }
+  //       this.sender = data['users'];
+  //     })
+  //   )
+  //     this.loadingprivate = true;
+  // }
 
   getmessages() {
 
@@ -156,12 +158,13 @@ export class PrivatefeedbackComponent implements OnInit {
   };
 
   
- rejectrequest(messageid : string ) {
+ rejectrequest() {
 
+  
+   return this.datastore.getdastoreobject().subscribe((data)=>{
 
-  this.feedback.delete("messageConversations.json?fields="+messageid+",assignee%5Bid%2C%20displayName%5D,messages%5B*%2Csender%5Bid%2CdisplayName%5D,attachments%5Bid%2C%20name%2C%20contentLength%5D%5D,userMessages%5Buser%5Bid%2C%20displayName%5D%5D&filter=messageType:eq:VALIDATION_RESULT").
-  subscribe( () => this.status = ' delete succecfully')
-
+   console.log(data)
+   })
   
   
   }

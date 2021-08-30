@@ -21,7 +21,8 @@
       <mat-expansion-panel-header> 
         <mat-panel-title >
           <mat-icon>account_circle</mat-icon>
-           {{messageItem.user?.displayName}}
+          {{messageItem.userFirstname}} {{messageItem.userSurname}} 
+         
           </mat-panel-title>
         <mat-panel-description  >
           Subject :{{messageItem.subject}}
@@ -67,8 +68,8 @@
       </form> -->
        
       <mat-action-row>
-        <button mat-raised-button  color="warn"  (click)="rejectrequest(messageItem.id)">Reject</button>
-        <button mat-raised-button color="primary"  (click)="acceptrequest()">Accept</button>
+        <button mat-raised-button  color="warn"  >Reject</button>
+        <button mat-raised-button color="primary">Accept</button>
       </mat-action-row>
       
 

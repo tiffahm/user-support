@@ -122,8 +122,9 @@ export class RequestformComponent implements OnInit {
   submitForm(){
 
     const requestPayload =  {
+       id : makeID(),
       "subject":"REQUEST FOR APROVAL CHANGE IN DATASET",
-      "text": "There is request to update datasets to ," +this.myForm.get('organizationunit').value+"  add the follwing data " + this.myForm.get('datasetsunit').value +"",
+      "text": "There is request to update datasets to ," +this.myForm.get('organizationunit').value+"  add the following data " + this.myForm.get('datasetsunit').value +" and remove the following "+this.myForm.get('datasetsunit').value ,
       "userGroups": [
         {
           "id": "QYrzIjSfI8z"
@@ -131,18 +132,37 @@ export class RequestformComponent implements OnInit {
       ]
     }
 
-    const requestobject =  {
-       id : makeID(),
-      "Action":"REQUEST FOR APROVAL CHANGE IN DATASET",
-      "datasets_added": this.myForm.get('datasetsunit').value,
-      "datasets_removed":  this.myForm.get('datasetsunit').value,
-      "organizationunit": +this.myForm.get('organizationunit').value,
-      "userGroups": [
-        {
-          "id": "QYrzIjSfI8z"
-        }
-      ]
+    const requestobject = 
+
+    {
+      "action": "Add "+this.myForm.get('datasetsunit').value +" form from "+this.myForm.get('organizationunit').value,
+      "method": "PUT",
+      "payload": {
+        "id": +this.myForm.get('datasetsunit').setValue('data.id'),
+        "name": this.myForm.get('datasetsunit'),
+        "organisationUnits": [
+          {
+            "id": "y77LiPqLMoq"
+          },
+        ],
+        "periodType": "Monthly"
+      },
+      "status": "OPEN",
+      "url": "api/dataSets/Lpw6GcnTrmS"
     }
+    
+    // {
+    
+    // //   "Action":"REQUEST FOR APROVAL CHANGE IN DATASET",
+    // //   "datasets_added": this.myForm.get('datasetsunit').value,
+    // //   "datasets_removed":  this.myForm.get('datasetsunit').value,
+    // //   "organizationunit": +this.myForm.get('organizationunit').value,
+    // //   "userGroups": [
+    // //     {
+    // //       "id": "QYrzIjSfI8z"
+    // //     }
+    // //   ]
+    // // }
     
 
     console.log(this.myForm)
@@ -157,7 +177,7 @@ export class RequestformComponent implements OnInit {
       (response) => console.log(response),
       (error) => console.log(error)
     )
-    this.request.post('dataStore/UserSupportApp/'+requestobject.id+'.json',requestobject).subscribe(
+    this.request.post('dataStore/UserSupportApp/'+requestPayload.id+'.json',requestobject).subscribe(
       (response) => console.log(response),
       (error) => console.log(error)
     )
@@ -165,17 +185,17 @@ export class RequestformComponent implements OnInit {
   }
 
 
-  selectorgunit(event){
+  // selectorgunit(event){
 
 
-    this.selectingorgunit  = event
+  //   this.selectingorgunit  = event
 
-    console.log(this.selectingorgunit)
+  //   console.log(this.selectingorgunit)
     
 
     
 
-  }
+  // }
 
   
 
