@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { dataElementGroupReducer } from '@iapps/ngx-dhis2-data-filter/lib/store/reducers/data-element-group.reducer';
+import { NgxDhis2HttpClientService } from '@iapps/ngx-dhis2-http-client';
 import { NotificationComponent } from '../notification/notification.component';
 import { DhisdataService } from '../services/dhisdata.service';
 import { makeID } from '../shared/helpers/make-id.helper';
@@ -21,19 +23,22 @@ export class ComposemessageComponent implements OnInit {
 
   favoriteSeason: string;
  types: string[] = ['private', 'feedback'];
+  user: '';
 
  
 
   constructor(
     public fb: FormBuilder,
     public users : DhisdataService,
+    private httpClient: NgxDhis2HttpClientService,
 
     private  _snackBar : MatSnackBar
   ) { }
 
-  ngOnInit() : void {
+  ngOnInit() :void{
     this. reactiveForm()
     this.fetchUsers()
+    // this.userget()
   }
 
    
@@ -44,7 +49,7 @@ export class ComposemessageComponent implements OnInit {
 
        subject : ['',[Validators.required]],
        text : ['',[Validators.required]],
-       receiver: ['',[Validators.required,]],
+       user: ['',[Validators.required,]],
      
 
     })
@@ -119,14 +124,26 @@ export class ComposemessageComponent implements OnInit {
 
   }
 
-
   fetchUsers() {
     return this.users.getUsers().subscribe((data: {}) => {
          
        console.log(data)
 
-       this.receiver = data ['users']
+       this.user = data ['users']
       })    
   }
+      //  userget(){
+      //    return this.httpClient.get('users').subscribe((data)=>{
+      //      console.warn(data)
+
+      //    })
+      //  }
+
+  // fetchUsers() {
+  //   return this.users.getUsers().subscribe((data: {}) => {
+  //         console.log(data)
+  //         // this.receiver = data ['users']
+  //     })    
+  // }
 
 }

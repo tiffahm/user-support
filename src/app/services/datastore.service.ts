@@ -12,6 +12,6 @@ export class DatastoreService {
 
 
   getdastoreobject(){
-    return  this.datastorerequest.get('https://play.dhis2.org/2.34.6/api/33/dataStore/UserSupportApp/S1bzFVdvo')
+    return  this.datastorerequest.get('https://play.dhis2.org/2.36.3/api/33/dataStore/UserSupportApp')
   }
 }

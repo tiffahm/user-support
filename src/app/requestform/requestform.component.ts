@@ -41,6 +41,7 @@ export class RequestformComponent implements OnInit {
 
   initialdataset : any []
   finaldataset : any []
+  selecteedorgunit: any;
 
   constructor( public units : OrganizationUnitsService ,
      public fb: FormBuilder ,
@@ -57,6 +58,7 @@ export class RequestformComponent implements OnInit {
     this.reactiveForm()
     this.getuserGroups()
     this.selectingorgunit(this.selectingorgunit)
+    this.getorgunitsdatasets()
   }
   
   reactiveForm() {
@@ -64,18 +66,45 @@ export class RequestformComponent implements OnInit {
 
     organizationunit: ['',[Validators.required]],
     datasetsunit: ['',[Validators.required]],
+    
      
     
       
   })
         throw new Error('Method not implemented.');
   }
+      
 
+  // getorgunitsdatasets(){
+
+  //   return this.units.getorganizationunits().subscribe((data)=>{
+  //     console.log(data)
+  //     const all = data['organisationUnits']
+  //   })
+
+  // }
 
 
 
 
   getunits(){
+    this.isDataAvailable = true
+
+       return this.units.getorganizationunits().subscribe((data : {}) =>{
+
+        this.isDataAvailable = true
+         
+      console.log(data)
+
+       this.selectedunits = data ['organisationUnits']
+      
+       })
+
+  }
+
+
+
+  getorgunitsdatasets(){
     this.isDataAvailable = true
 
        return this.units.getorganizationunits().subscribe((data : {}) =>{
@@ -138,8 +167,8 @@ export class RequestformComponent implements OnInit {
       "action": "Add "+this.myForm.get('datasetsunit').value +" form from "+this.myForm.get('organizationunit').value,
       "method": "PUT",
       "payload": {
-        "id": +this.myForm.get('datasetsunit').setValue('data.id'),
-        "name": this.myForm.get('datasetsunit'),
+        "id": +this.myForm.get('datasetsunit').value,
+        "name": this.myForm.get('datasetsunit').value,
         "organisationUnits": [
           {
             "id": "y77LiPqLMoq"
@@ -208,7 +237,7 @@ export class RequestformComponent implements OnInit {
   }
 
   selectingorgunit(event){
-    
+        
   }
 
 }

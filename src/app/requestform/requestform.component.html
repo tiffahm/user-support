@@ -37,7 +37,7 @@
              
                <mat-form-field appearance="fill" class="example-form">
                  <mat-label>Select organization units</mat-label>
-                 <mat-select formControlName="organizationunit"  >
+                 <mat-select formControlName="organizationunit"   input="selectingorgunit($event)">
                   <mat-option [value] = "selecteditem.name" *ngFor="let selecteditem of selectedunits"> {{selecteditem.name}}   
                             
 
@@ -88,13 +88,13 @@
                </mat-form-field >
                   <mat-form-field appearance="fill"  class="example-form"   >
                     <mat-label>Select dataset</mat-label>
-                    <mat-select formControlName="datasetsunit" multiple>
+                    <mat-select formControlName="datasetsunit"  multiple>
 
                       <!-- {{selecteditem.dataSets | json}} -->
 
                      
 
-                              <mat-option  [value] = "data.name" [value]="data.id"  *ngFor="let data of  dataset " > {{data.name}}   </mat-option>
+                              <mat-option  [value] = "data.name"   *ngFor="let data of  dataset " > {{data.name}}   </mat-option>
                               
                             
     

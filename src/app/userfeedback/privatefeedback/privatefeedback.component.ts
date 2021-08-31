@@ -159,12 +159,11 @@ export class PrivatefeedbackComponent implements OnInit {
 
   
  rejectrequest() {
+   
+  return this.datastore.getdastoreobject().subscribe((data)=>{
+    console.log(data)
+  })
 
-  
-   return this.datastore.getdastoreobject().subscribe((data)=>{
-
-   console.log(data)
-   })
   
   
   }
