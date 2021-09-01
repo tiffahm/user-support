@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxDhis2HttpClientService } from '@iapps/ngx-dhis2-http-client';
 import { NotificationComponent } from '../notification/notification.component';
@@ -9,7 +9,7 @@ import { makeID } from '../shared/helpers/make-id.helper';
 import {SelectionModel} from '@angular/cdk/collections';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
-import {BehaviorSubject} from 'rxjs'
+import {BehaviorSubject, empty, observable} from 'rxjs'
 import { UserGroupsService } from '../services/user-groups.service';
 @Component({
   selector: 'app-requestform',
@@ -17,9 +17,14 @@ import { UserGroupsService } from '../services/user-groups.service';
   styleUrls: ['./requestform.component.css']
 })
 
+
+
 export class RequestformComponent implements OnInit {
 
-  
+
+  @ViewChild('orgunit') orgunit
+    
+  all : any  
   slectedorgunit = ""
   checked = true;
   isDataAvailable = false;
@@ -43,6 +48,8 @@ export class RequestformComponent implements OnInit {
   finaldataset : any []
   selecteedorgunit: any;
 
+  selecteddatasets  = ''
+
   constructor( public units : OrganizationUnitsService ,
      public fb: FormBuilder ,
      private alldatasets : DatasetService,
@@ -57,7 +64,7 @@ export class RequestformComponent implements OnInit {
     this.getdatasets()
     this.reactiveForm()
     this.getuserGroups()
-    this.selectingorgunit(this.selectingorgunit)
+   
     this.getorgunitsdatasets()
   }
   
@@ -66,10 +73,8 @@ export class RequestformComponent implements OnInit {
 
     organizationunit: ['',[Validators.required]],
     datasetsunit: ['',[Validators.required]],
+    selecteddatasets : ['',[Validators.required]]
     
-     
-    
-      
   })
         throw new Error('Method not implemented.');
   }
@@ -110,7 +115,7 @@ export class RequestformComponent implements OnInit {
        return this.units.getorganizationunits().subscribe((data : {}) =>{
 
         this.isDataAvailable = true
-         
+      
       console.log(data)
 
        this.selectedunits = data ['organisationUnits']
@@ -118,10 +123,9 @@ export class RequestformComponent implements OnInit {
        })
 
   }
+
   getdatasets() {
   
-
-   
     return this.alldatasets.getAllDataSets().subscribe((data)=>{
       this.isDataAvailable = true
       this.dataset = data ['dataSets']
@@ -236,8 +240,19 @@ export class RequestformComponent implements OnInit {
 
   }
 
-  selectingorgunit(event){
-        
-  }
+  selectingorgunit(event : any ) {
+           for (let index = 0; index < event.length; index++) {
+          
+            return this.units.getorganizationunitsdatasets(event).subscribe(data => {
+
+              console.log(data)
+              this.selecteddatasets = data 
+            })
+         }
+     
+    
+  } 
+
 
 }
+

@@ -76,7 +76,7 @@ export class ComposemessageComponent implements OnInit {
     
 
     const messagePayload = {
-      "subject": this.myForm.get('text').value,
+      "subject": this.myForm.get('subject').value,
       "text":this.myForm.get('text').value,
       "users": [
         {
@@ -99,11 +99,11 @@ export class ComposemessageComponent implements OnInit {
     }
    
     
-      this.messages.post('messageConversitions.json', messagePayload).subscribe(
-        (response) => console.log(response),
-        (error) => console.log(error)
-      )
-      this.messages.post('https://play.dhis2.org/2.36.3/api/36/messageConversations/qXF4GmtZZrE?internal=false', messagePayload).subscribe(
+      // this.messages.post('users.json', messagePayload).subscribe(
+      //   (response) => console.log(response),
+      //   (error) => console.log(error)
+      // )
+      this.messages.post('messageConversations?messageType=PRIVATE&messageConversationStatus=OPEN', messagePayload).subscribe(
         (response) => console.log(response),
         (error) => console.log(error)
       )
