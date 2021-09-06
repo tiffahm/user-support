@@ -52,6 +52,7 @@ import { ValidatiofeebackComponent } from './userfeedback/validatiofeeback/valid
 import { PrivatefeedbackComponent } from './userfeedback/privatefeedback/privatefeedback.component';
 import { ComposemessageComponent } from './composemessage/composemessage.component';
 import { DatasetComponent } from './dataset/dataset.component';
+import { ClassifierService } from './classifier.service';
 
 
 
@@ -174,7 +175,7 @@ component: ValidatiofeebackComponent
       enabled: environment.production
     })
   ],
-  providers: [{ provide: RouterStateSerializer, useClass: RouteSerializer}],
+  providers: [{ provide: RouterStateSerializer, useClass: RouteSerializer}, ClassifierService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
